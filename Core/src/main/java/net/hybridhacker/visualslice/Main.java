@@ -1,9 +1,11 @@
 package net.hybridhacker.visualslice;
 
+import net.hybridhacker.visualslice.display.Display;
+
 /**
  * Application's main class
  */
-public class Main {
+public final class Main {
     
     /**
      * Main method
@@ -11,6 +13,7 @@ public class Main {
      * @param args terminal arguments
      */
     public static void main(final String... args) {
-        
+        final Display display = new Display("VisualSlice", 800, 600);
+        display.start();
     }
 }
