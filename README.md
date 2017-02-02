@@ -1,0 +1,2 @@
+# VisualSlice
+Java Music Visualizer
