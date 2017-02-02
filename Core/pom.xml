@@ -46,4 +46,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <!-- clojars repo -->
+        <repository>
+            <id>clojars-repo</id>
+            <url>http://clojars.org/repo/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>ddf.minim</groupId>
+            <artifactId>ddf.minim</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+    </dependencies>
 </project>
