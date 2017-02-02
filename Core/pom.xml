@@ -39,6 +39,10 @@
                         </goals>
                     </execution>
                 </executions>
+
+                <configuration>
+                    <outputDirectory>${project.basedir}/target/original</outputDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>
