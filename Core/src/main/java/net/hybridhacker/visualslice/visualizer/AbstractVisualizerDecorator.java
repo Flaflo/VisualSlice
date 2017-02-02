@@ -1,6 +1,8 @@
 package net.hybridhacker.visualslice.visualizer;
 
 import ddf.minim.AudioBuffer;
+import ddf.minim.analysis.BeatDetect;
+import ddf.minim.analysis.FFT;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -14,9 +16,9 @@ public abstract class AbstractVisualizerDecorator implements IVisualizer {
     private IVisualizer visualizer;
     
     @Override
-    public final void onDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer) {
-        this.doDraw(leftAudioBuffer, rightAudioBuffer, mixAudioBuffer);
-        this.visualizer.onDraw(leftAudioBuffer, rightAudioBuffer, mixAudioBuffer);
+    public final void onDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
+        this.doDraw(leftAudioBuffer, rightAudioBuffer, mixAudioBuffer, beatDetect, fft);
+        this.visualizer.onDraw(leftAudioBuffer, rightAudioBuffer, mixAudioBuffer, beatDetect, fft);
     }
     
     /**
@@ -26,7 +28,7 @@ public abstract class AbstractVisualizerDecorator implements IVisualizer {
      * @param rightAudioBuffer right audio buffer
      * @param mixAudioBuffer   mixed audio buffer
      */
-    protected abstract void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer);
+    protected abstract void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft);
     
     @Override
     public final String getName() {
