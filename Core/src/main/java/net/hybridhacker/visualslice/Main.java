@@ -13,7 +13,7 @@ public final class Main {
      * @param args terminal arguments
      */
     public static void main(final String... args) {
-        final Display display = new Display("VisualSlice", 800, 600, 60);
+        final Display display = new Display("VisualSlice", 800, 600);
         display.start();
     }
 }
