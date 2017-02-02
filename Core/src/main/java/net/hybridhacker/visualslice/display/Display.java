@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Data;
 import net.hybridhacker.visualslice.utils.G2D;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Display for VisualSlice
@@ -20,6 +21,8 @@ public final class Display extends Thread {
     private final int width, height;
 
     private final long fpsMillis;
+
+    private Runnable[] renderers;
 
     /**
      * @param title the title
@@ -41,6 +44,8 @@ public final class Display extends Thread {
         this.width = width;
         this.height = height;
         this.fpsMillis = 1000 / fps;
+        
+        this.renderers = new Runnable[0];
     }
 
     @Override
@@ -60,5 +65,23 @@ public final class Display extends Thread {
                 Logger.getLogger(Display.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    /**
+     * Adds a renderer
+     *
+     * @param runnable the runnable
+     */
+    public void addRenderer(final Runnable runnable) {
+        this.setRenderers(ArrayUtils.add(this.getRenderers(), runnable));
+    }
+
+    /**
+     * Removes a renderer
+     *
+     * @param runnable the runnable
+     */
+    public void removeRenderer(final Runnable runnable) {
+        this.setRenderers(ArrayUtils.removeElement(this.getRenderers(), runnable));
     }
 }
