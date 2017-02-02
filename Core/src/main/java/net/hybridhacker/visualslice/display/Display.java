@@ -1,5 +1,6 @@
 package net.hybridhacker.visualslice.display;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Data;
@@ -56,7 +57,7 @@ public final class Display extends Thread {
         while (G2D.window().isShowing()) {
             G2D.push();
             G2D.high();
-
+            Arrays.stream(this.getRenderers()).forEach(Runnable::run);
             G2D.pop();
 
             try {
