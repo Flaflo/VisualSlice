@@ -11,5 +11,35 @@
 
     <artifactId>slice-core</artifactId>
 
+    <build>
+        <plugins>
+            <!-- configure artifact -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>net.hybridhacker.visualslice.Main</mainClass>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
+            <!-- shade the artifact with dependencies -->
+            <plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

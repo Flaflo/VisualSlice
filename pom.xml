@@ -8,9 +8,18 @@
     <artifactId>visualslice</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>Core</module>
     </modules>
+
+    <repositories>
+        <!-- clojars repo -->
+        <repository>
+            <id>clojars-repo</id>
+            <url>http://clojars.org/repo/</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -29,6 +38,24 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ddf.minim</groupId>
+            <artifactId>ddf.minim</artifactId>
+            <version>2.2.0</version>
         </dependency>
     </dependencies>
 
