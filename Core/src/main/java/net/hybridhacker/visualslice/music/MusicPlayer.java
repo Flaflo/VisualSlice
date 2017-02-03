@@ -5,13 +5,16 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.File;
+import java.net.URI;
+import java.util.Optional;
 
 /**
- *
+ * A simple file music player
  */
-public class MusicPlayer {
+public class MusicPlayer implements IMusicPlayer {
     
     private final Minim minim;
     private AudioPlayer audioPlayer;
@@ -23,15 +26,14 @@ public class MusicPlayer {
         this.minim = new Minim();
     }
     
-    /**
-     * Load and play an audio file
-     *
-     * @param audioFile audio file
-     */
-    public void play(final File audioFile) {
+    @Override
+    public void play(final URI audioSource) {
         if (this.audioPlayer.isPlaying()) {
             this.audioPlayer.close();
         }
+        
+        final File audioFile = new File(audioSource);
+        if (!audioFile.exists()) throw new IllegalArgumentException("The given URI does not point to a file");
         
         this.audioPlayer = minim.loadFile(audioFile.getAbsolutePath());
         this.audioPlayer.play();
@@ -44,39 +46,35 @@ public class MusicPlayer {
         this.audioPlayer.close();
     }
     
-    /**
-     * @return the right audio buffer
-     */
-    public AudioBuffer getRightAudioBuffer() {
-        return this.audioPlayer.right;
+    @Override
+    public void pause() {
+        throw new NotImplementedException();
     }
     
-    /**
-     * @return the left audio buffer
-     */
-    public AudioBuffer getLeftAudioBuffer() {
-        return this.audioPlayer.left;
+    @Override
+    public Optional<AudioBuffer> getRightAudioBuffer() {
+        return this.audioPlayer == null ? Optional.empty() : Optional.of(this.audioPlayer.right);
     }
     
-    /**
-     * @return the audio buffer mixed from right and left
-     */
-    public AudioBuffer getMixedAudioBuffer() {
-        return this.audioPlayer.mix;
+    @Override
+    public Optional<AudioBuffer> getLeftAudioBuffer() {
+        return this.audioPlayer == null ? Optional.empty() : Optional.of(this.audioPlayer.left);
     }
     
-    /**
-     * @return the beat detect object of the current played track
-     */
-    public BeatDetect getBeatDetector() {
-        // TODO
-        return null;
+    @Override
+    public Optional<AudioBuffer> getMixedAudioBuffer() {
+        return this.audioPlayer == null ? Optional.empty() : Optional.of(this.audioPlayer.mix);
     }
     
-    /**
-     * @return the fast fourier transform object of the current played track. The player handles (un-)registering that object
-     */
-    public FFT getFFT() {
-        return null;
+    @Override
+    public Optional<BeatDetect> getBeatDetect() {
+        // TODO generate beat detect
+        return Optional.empty();
+    }
+    
+    @Override
+    public Optional<FFT> getFFT() {
+        // TODO register fft
+        return Optional.empty();
     }
 }
