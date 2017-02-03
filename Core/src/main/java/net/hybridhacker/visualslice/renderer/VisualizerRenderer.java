@@ -1,7 +1,7 @@
 package net.hybridhacker.visualslice.renderer;
 
 import lombok.RequiredArgsConstructor;
-import net.hybridhacker.visualslice.music.MusicPlayer;
+import net.hybridhacker.visualslice.music.IMusicPlayer;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 
 /**
@@ -11,11 +11,15 @@ import net.hybridhacker.visualslice.visualizer.IVisualizer;
 public class VisualizerRenderer implements Runnable {
     
     private final IVisualizer visualizer;
-    private final MusicPlayer musicPlayer;
+    private final IMusicPlayer musicPlayer;
     
     @Override
     public void run() {
-        this.visualizer.onDraw(musicPlayer.getLeftAudioBuffer(), musicPlayer.getRightAudioBuffer(), musicPlayer.getMixedAudioBuffer(),
-                               musicPlayer.getBeatDetector(), musicPlayer.getFFT());
+        // TODO add present checks for beat detect and fft
+        if (!musicPlayer.getMixedAudioBuffer().isPresent() || !musicPlayer.getLeftAudioBuffer().isPresent() ||
+            !musicPlayer.getRightAudioBuffer().isPresent()) return;
+    
+        this.visualizer.onDraw(musicPlayer.getLeftAudioBuffer().get(), musicPlayer.getRightAudioBuffer().get(),
+                               musicPlayer.getMixedAudioBuffer().get(), musicPlayer.getBeatDetect().get(), musicPlayer.getFFT().get());
     }
 }
