@@ -5,6 +5,7 @@ import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
 import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.ParseException;
 
 import javax.imageio.ImageIO;
@@ -48,8 +49,15 @@ public final class Main {
                                        file -> resources[1] = file.isPresent() ? file.get() : resources[1]);
     
         // parse command line
-        commandLineInterface.parse(args);
-    
+        try {
+            commandLineInterface.parse(args);
+        } catch (final MissingOptionException e) {
+            //noinspection unchecked
+            System.err.println("Missing required command line option(s): " + String.join(", ", e.getMissingOptions()));
+            System.err.println("Try --help for more information");
+            return;
+        }
+        
         // setup display
         final Display display = new Display("VisualSlice", displaySettings[0], displaySettings[1], displaySettings[0]);
         BufferedImage theImage = null;
