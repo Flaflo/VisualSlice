@@ -6,7 +6,7 @@ import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorat
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
 
 import java.awt.*;
-import java.net.URI;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -29,11 +29,11 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
     /**
      * Decorates the visualizer with a background image
      *
-     * @param image an URI pointing to a image
+     * @param image a buffered image containing the background image
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder image(final URI image) {
+    public DefaultVisualizerBuilder image(final BufferedImage image) {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
         
         this.visualizer = new ImageBackgroundDecorator(this.visualizer, image);

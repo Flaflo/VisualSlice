@@ -1,12 +1,16 @@
 package net.hybridhacker.visualslice;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 import net.hybridhacker.visualslice.display.Display;
 import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Application's main class
@@ -25,9 +29,16 @@ public final class Main {
         if (args.length >= 1) {
             tempTestPlayer.play(new File(String.join(" ", args)).toURI());
         }
-        display.addRenderer(
-                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(new URI("http://ni341745_1.vweb16.nitrado.net/visualslice.jpg")).buildVisualizer(),
-                                       tempTestPlayer));
+    
+        BufferedImage theImage = null;
+        try {
+            theImage = ImageIO.read(new URI("http://ni341745_1.vweb16.nitrado.net/visualslice.jpg").toURL());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        display.addRenderer(new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(theImage).buildVisualizer(),
+                                                   tempTestPlayer));
         display.start();
     }
 }
