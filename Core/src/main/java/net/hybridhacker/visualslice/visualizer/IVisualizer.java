@@ -11,6 +11,11 @@ import net.hybridhacker.visualslice.visualizer.settings.Setting;
 public interface IVisualizer {
     
     /**
+     * Initialize the visualizer
+     */
+    void initialize();
+    
+    /**
      * Draw the visualizer output. The {@link AudioBuffer} contains all currently buffered audio
      * information
      *

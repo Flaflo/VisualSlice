@@ -36,6 +36,9 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
     }
     
     @Override
+    public void initialize() {}
+    
+    @Override
     public String getName() {
         return "Image Background Decorator";
     }

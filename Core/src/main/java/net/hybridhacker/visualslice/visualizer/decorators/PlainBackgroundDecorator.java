@@ -35,6 +35,9 @@ public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     }
     
     @Override
+    public void initialize() {}
+    
+    @Override
     public String getName() {
         return "Plain Colored Background Decorator";
     }

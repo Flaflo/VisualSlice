@@ -34,6 +34,9 @@ public class BasicFrequencyLine implements IVisualizer {
     private Color color;
     
     @Override
+    public void initialize() {}
+    
+    @Override
     public void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer,
                        final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
         
