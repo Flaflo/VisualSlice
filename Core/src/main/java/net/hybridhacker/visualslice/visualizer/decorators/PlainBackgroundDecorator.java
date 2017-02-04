@@ -24,8 +24,10 @@ public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     }
     
     @Override
-    protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer,
-                          final BeatDetect beatDetect, final FFT fft) {
+    protected void doInitialize() {}
+    
+    @Override
+    protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
         G2D.clear(this.color);
     }
     
@@ -33,9 +35,6 @@ public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     public AbstractVisualizerDecorator create(final IVisualizer embeddedVisualizer) {
         return new PlainBackgroundDecorator(embeddedVisualizer);
     }
-    
-    @Override
-    public void initialize() {}
     
     @Override
     public String getName() {
