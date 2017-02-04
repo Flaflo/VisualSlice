@@ -34,7 +34,7 @@ public abstract class AbstractVisualizerDecorator implements IVisualizer {
                                    final BeatDetect beatDetect, final FFT fft);
     
     /**
-     * @return an instance of this class
+     * @return an instance of this class. This method must not use any instance specific data or objects
      */
     public abstract AbstractVisualizerDecorator create(final IVisualizer embeddedVisualizer);
 }

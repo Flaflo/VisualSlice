@@ -26,7 +26,7 @@ public interface IVisualizer {
                 final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft);
     
     /**
-     * @return the name of the visualizer
+     * @return the name of the visualizer. This method must return the same string for any instance
      */
     String getName();
     
