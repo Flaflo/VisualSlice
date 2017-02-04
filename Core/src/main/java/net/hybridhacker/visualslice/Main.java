@@ -1,20 +1,21 @@
 package net.hybridhacker.visualslice;
 
-import java.awt.*;
-import java.io.File;
 import net.hybridhacker.visualslice.display.Display;
 import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
-import net.hybridhacker.visualslice.utils.G2D;
 import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
+import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
+
+import java.awt.*;
+import java.io.File;
 
 /**
  * Application's main class
  */
 public final class Main {
-
+    
     private static final MusicPlayer tempTestPlayer = new MusicPlayer();
-
+    
     /**
      * Main method
      *
@@ -25,8 +26,7 @@ public final class Main {
         if (args.length >= 1) {
             tempTestPlayer.play(new File(String.join(" ", args)).toURI());
         }
-        display.addRenderer(() -> G2D.clear(Color.BLACK));
-        display.addRenderer(new VisualizerRenderer(new DebugVisualizer(), tempTestPlayer));
+        display.addRenderer(new VisualizerRenderer(new PlainBackgroundDecorator(new DebugVisualizer(), Color.BLACK), tempTestPlayer));
         display.start();
     }
 }
