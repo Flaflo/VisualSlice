@@ -8,7 +8,6 @@ import net.hybridhacker.visualslice.utils.G2D;
 import net.hybridhacker.visualslice.visualizer.AbstractVisualizerDecorator;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -56,6 +55,6 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
     
     @Override
     public Setting<?>[] getSettings() {
-        throw new NotImplementedException();
+        return new Setting<?>[] {new Setting<>("Image URI", this.imageUri, this::setImageUri),};
     }
 }
