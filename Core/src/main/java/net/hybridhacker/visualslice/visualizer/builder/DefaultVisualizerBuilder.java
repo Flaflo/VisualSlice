@@ -1,13 +1,14 @@
 package net.hybridhacker.visualslice.visualizer.builder;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 import net.hybridhacker.visualslice.visualizer.beat.DrumkitBeatVisualizer;
 import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -71,7 +72,7 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      * @return this builder instance
      */
     public DefaultVisualizerBuilder basicFrequencyLine(final int marginTop, final Color color) {
-        this.visualizer = new BasicFrequencyLine(marginTop, color);
+        this.visualizer = new BasicFrequencyLine();
         return this;
     }
     
