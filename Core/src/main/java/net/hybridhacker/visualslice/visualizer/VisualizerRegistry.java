@@ -37,11 +37,10 @@ public class VisualizerRegistry {
      * Register a visualizer and its settings
      *
      * @param visualizer visualizer implementation
-     * @param settings   settings of the visualizer
      */
-    public void registerVisualizer(final IVisualizer visualizer, final Setting... settings) {
+    public void registerVisualizer(final IVisualizer visualizer) {
         this.visualizerList.add(visualizer);
-        this.visualizerSettings.put(visualizer, settings);
+        this.visualizerSettings.put(visualizer, visualizer.getSettings());
     }
     
     /**
