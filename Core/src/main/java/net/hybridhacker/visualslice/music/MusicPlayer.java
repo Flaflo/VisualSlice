@@ -54,27 +54,52 @@ public class MusicPlayer implements IMusicPlayer {
 
     @Override
     public Optional<Integer> getLength() {
-        return Optional.ofNullable(this.audioPlayer.length());
+        if (this.getAudioPlayer().isPresent()) {
+            return Optional.ofNullable(this.getAudioPlayer().get().length());
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<Integer> getPosition() {
-        return Optional.ofNullable(this.audioPlayer.position());
+        if (this.getAudioPlayer().isPresent()) {
+            return Optional.ofNullable(this.getAudioPlayer().get().position());
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<AudioBuffer> getRightAudioBuffer() {
-        return Optional.ofNullable(this.audioPlayer.right);
+        if (this.getAudioPlayer().isPresent()) {
+            return Optional.ofNullable(this.getAudioPlayer().get().right);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<AudioBuffer> getLeftAudioBuffer() {
-        return Optional.ofNullable(this.audioPlayer.left);
+        if (this.getAudioPlayer().isPresent()) {
+            return Optional.ofNullable(this.getAudioPlayer().get().left);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<AudioBuffer> getMixedAudioBuffer() {
-        return Optional.ofNullable(this.audioPlayer.mix);
+        if (this.getAudioPlayer().isPresent()) {
+            return Optional.ofNullable(this.getAudioPlayer().get().mix);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<AudioPlayer> getAudioPlayer() {
+        return Optional.ofNullable(this.audioPlayer);
     }
 
     @Override
