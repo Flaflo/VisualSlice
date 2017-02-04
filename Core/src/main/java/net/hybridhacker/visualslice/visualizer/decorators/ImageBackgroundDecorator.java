@@ -25,7 +25,8 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
     }
     
     @Override
-    protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
+    protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer,
+                          final BeatDetect beatDetect, final FFT fft) {
         if (this.image != null) G2D.texture(0, 0, G2D.canvas().getWidth(), G2D.canvas().getHeight(), this.image);
     }
     
