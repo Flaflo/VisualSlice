@@ -3,6 +3,7 @@ package net.hybridhacker.visualslice.utils;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -66,5 +67,13 @@ public class CommandLineInterface {
         
         this.handlers.keySet().stream().filter(commandLine::hasOption)
                      .forEach(key -> handlers.get(key).accept(Optional.ofNullable(commandLine.getOptionValue(key, null))));
+    }
+    
+    /**
+     * Print the help for the current set up CLI
+     */
+    public void printHelp() {
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("VisualSlice", this.options);
     }
 }

@@ -49,6 +49,12 @@ public final class Main {
         commandLineInterface.addOption("img", "background image URI", "image", true,
                                        file -> resources[1] = file.isPresent() ? file.get() : resources[1]);
     
+        // shortcut for help page printing
+        if (args[0].equalsIgnoreCase("--help")) {
+            commandLineInterface.printHelp();
+            return;
+        }
+        
         // parse command line
         try {
             commandLineInterface.parse(args);
