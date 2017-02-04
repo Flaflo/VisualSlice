@@ -8,7 +8,7 @@ import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorat
 import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.net.URI;
 
 /**
  *
@@ -31,14 +31,16 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
     /**
      * Decorates the visualizer with a background image
      *
-     * @param image a buffered image containing the background image
+     * @param image an URI pointing to the background image
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder image(final BufferedImage image) {
+    public DefaultVisualizerBuilder image(final URI image) {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
     
-        this.visualizer = new ImageBackgroundDecorator(this.visualizer);
+        ImageBackgroundDecorator decorator = new ImageBackgroundDecorator(this.visualizer);
+        decorator.setImageUri(image);
+        this.visualizer = decorator;
         return this;
     }
     
