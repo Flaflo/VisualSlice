@@ -33,32 +33,6 @@ public class BasicFrequencyLine implements IVisualizer {
     @Setter
     private Color color;
     
-    /**
-     * @param topMargin margin from canvas top
-     * @param color     Color of the bars
-     */
-    public BasicFrequencyLine(final int topMargin, final Color color) {
-        this(0.8, 2, 8, 3, topMargin, color);
-    }
-    
-    /**
-     * @param scale        multiplier of FFT output
-     * @param barMinHeight minimum height of bars
-     * @param barWidth     width of bars
-     * @param gap          gap between bars
-     * @param topMargin    margin from canvas top
-     * @param color        color of the bars
-     */
-    public BasicFrequencyLine(final double scale, final int barMinHeight, final int barWidth, final int gap, final int topMargin,
-                              final Color color) {
-        this.scale = scale;
-        this.barMinHeight = barMinHeight;
-        this.barWidth = barWidth;
-        this.gap = gap;
-        this.topMargin = topMargin;
-        this.color = color;
-    }
-    
     @Override
     public void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer,
                        final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
