@@ -12,9 +12,9 @@ import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
  * Application's main class
  */
 public final class Main {
-    
+
     private static final MusicPlayer tempTestPlayer = new MusicPlayer();
-    
+
     /**
      * Main method
      *
@@ -22,7 +22,9 @@ public final class Main {
      */
     public static void main(final String... args) {
         final Display display = new Display("VisualSlice", 800, 600, 120);
-        tempTestPlayer.play(new File("C:\\Users\\Flaflo\\Desktop\\Desktop\\Fler - Vibe.mp3").toURI());
+        if (args.length >= 1) {
+            tempTestPlayer.play(new File(String.join(" ", args)).toURI());
+        }
         display.addRenderer(() -> G2D.clear(Color.BLACK));
         display.addRenderer(new VisualizerRenderer(new DebugVisualizer(), tempTestPlayer));
         display.start();
