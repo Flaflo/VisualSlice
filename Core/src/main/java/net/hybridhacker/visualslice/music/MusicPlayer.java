@@ -46,7 +46,8 @@ public class MusicPlayer implements IMusicPlayer, AudioListener {
 
         this.fft = new FFT(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
         this.beatDetect = new BeatDetect(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
-
+        this.beatDetect.setSensitivity(300);
+        
         this.audioPlayer.addListener(this);
     }
 
