@@ -5,11 +5,10 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.File;
 import java.net.URI;
 import java.util.Optional;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * A simple file music player
@@ -28,7 +27,7 @@ public class MusicPlayer implements IMusicPlayer {
     
     @Override
     public void play(final URI audioSource) {
-        if (this.audioPlayer.isPlaying()) {
+        if (this.audioPlayer != null && this.audioPlayer.isPlaying()) {
             this.audioPlayer.close();
         }
         
@@ -53,17 +52,17 @@ public class MusicPlayer implements IMusicPlayer {
     
     @Override
     public Optional<AudioBuffer> getRightAudioBuffer() {
-        return this.audioPlayer == null ? Optional.empty() : Optional.of(this.audioPlayer.right);
+        return Optional.ofNullable(this.audioPlayer.right);
     }
     
     @Override
     public Optional<AudioBuffer> getLeftAudioBuffer() {
-        return this.audioPlayer == null ? Optional.empty() : Optional.of(this.audioPlayer.left);
+        return Optional.ofNullable(this.audioPlayer.left);
     }
     
     @Override
     public Optional<AudioBuffer> getMixedAudioBuffer() {
-        return this.audioPlayer == null ? Optional.empty() : Optional.of(this.audioPlayer.mix);
+        return Optional.ofNullable(this.audioPlayer.mix);
     }
     
     @Override
