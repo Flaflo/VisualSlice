@@ -10,7 +10,7 @@ import java.util.function.Function;
 public class DecoratorRegistry {
     private final static DecoratorRegistry instance;
     
-    private Map<String, Function<IVisualizer, ? extends AbstractVisualizerDecorator>> registeredDecorators = new HashMap<>();
+    private final Map<String, Function<IVisualizer, ? extends AbstractVisualizerDecorator>> registeredDecorators = new HashMap<>();
     
     static {
         instance = new DecoratorRegistry();
