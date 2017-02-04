@@ -1,6 +1,5 @@
 package net.hybridhacker.visualslice.renderer;
 
-import lombok.RequiredArgsConstructor;
 import net.hybridhacker.visualslice.music.IMusicPlayer;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 
@@ -9,11 +8,23 @@ import java.util.NoSuchElementException;
 /**
  *
  */
-@RequiredArgsConstructor
 public class VisualizerRenderer implements Runnable {
     
     private final IVisualizer visualizer;
     private final IMusicPlayer musicPlayer;
+    
+    /**
+     * Initializes the given visualizers and starts to render it
+     *
+     * @param visualizer  (decorated) visualizer to render
+     * @param musicPlayer music player providing data to the visualizer
+     */
+    public VisualizerRenderer(final IVisualizer visualizer, final IMusicPlayer musicPlayer) {
+        this.visualizer = visualizer;
+        this.musicPlayer = musicPlayer;
+        
+        this.visualizer.initialize();
+    }
     
     @Override
     public void run() {
