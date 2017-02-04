@@ -37,9 +37,4 @@ public abstract class AbstractVisualizerDecorator implements IVisualizer {
      * @return an instance of this class
      */
     public abstract AbstractVisualizerDecorator create(final IVisualizer embeddedVisualizer);
-    
-    @Override
-    public final String getName() {
-        return this.visualizer.getName();
-    }
 }

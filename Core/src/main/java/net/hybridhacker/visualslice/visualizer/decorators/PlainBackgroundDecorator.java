@@ -35,6 +35,11 @@ public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     }
     
     @Override
+    public String getName() {
+        return "Plain Colored Background Decorator";
+    }
+    
+    @Override
     public Setting<?>[] getSettings() {
         return new Setting<?>[] {new Setting<>("Color", this.color, this::setColor)};
     }
