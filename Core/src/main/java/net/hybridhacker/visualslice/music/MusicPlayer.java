@@ -5,10 +5,11 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.io.File;
 import java.net.URI;
 import java.util.Optional;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * A simple file music player
@@ -52,7 +53,17 @@ public class MusicPlayer implements IMusicPlayer {
     public void pause() {
         throw new NotImplementedException();
     }
-
+    
+    @Override
+    public void setVolume(final float volume) {
+        throw new NotImplementedException();
+    }
+    
+    @Override
+    public float getVolume() {
+        throw new NotImplementedException();
+    }
+    
     @Override
     public Optional<Integer> getLength() {
         return this.audioPlayer != null ? Optional.of(this.audioPlayer.length()) : Optional.empty();

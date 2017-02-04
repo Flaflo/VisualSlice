@@ -3,6 +3,7 @@ package net.hybridhacker.visualslice.music;
 import ddf.minim.AudioBuffer;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
+
 import java.net.URI;
 import java.util.Optional;
 
@@ -27,6 +28,18 @@ public interface IMusicPlayer {
      * Toggle pause state of the music player
      */
     void pause();
+    
+    /**
+     * Sets the volume of the player between a min and max of 0 to 1
+     *
+     * @param volume a float value between 0 and 1
+     */
+    void setVolume(final float volume);
+    
+    /**
+     * @return the volume of the music player between 0 and 1
+     */
+    float getVolume();
     
     /**
      * @return the player track length
