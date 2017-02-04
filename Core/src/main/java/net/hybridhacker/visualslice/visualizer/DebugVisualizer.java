@@ -26,7 +26,7 @@ public class DebugVisualizer implements IVisualizer {
 
         for (int i = 0; i < bufferSize; i++) {
             G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 20), i, (int) (50 - leftAudioBuffer.get(i + 1) * 20), rainbow[playerPosition]);
-            G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 + rightAudioBuffer.get(i + 1) * 20), rainbow[playerPosition]);
+            G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 - rightAudioBuffer.get(i + 1) * 20), rainbow[playerPosition]);
         }
     }
 
