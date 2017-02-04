@@ -249,10 +249,8 @@ public final class G2D {
     }
 
     public static void init(int buffers) {
-        if (canvas == null) {
-            return;
-        }
-
+        frame.add(G2D.canvas(frame.getWidth(), frame.getHeight()));
+        
         if (canvas.getBufferStrategy() == null) {
             canvas.createBufferStrategy(buffers);
         }
@@ -289,7 +287,6 @@ public final class G2D {
 
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setSize(new Dimension(width, height));
-        jframe.add(G2D.canvas(width, height));
 
         if (centered) {
             jframe.setLocationRelativeTo(null);

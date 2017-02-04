@@ -1,9 +1,11 @@
 package net.hybridhacker.visualslice.display;
 
+import java.awt.BorderLayout;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Data;
+import net.hybridhacker.visualslice.gui.VisualSliceGui;
 import net.hybridhacker.visualslice.utils.G2D;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -52,7 +54,10 @@ public final class Display extends Thread {
     @Override
     public void run() {
         G2D.window(this.getTitle(), this.getWidth(), this.getHeight(), false, true);
+        G2D.window().setLayout(new BorderLayout());
+        G2D.window().add(new VisualSliceGui(), BorderLayout.WEST);
         G2D.init(BUFFERS);
+        G2D.window().pack();
 
         while (G2D.window().isShowing()) {
             G2D.push();
