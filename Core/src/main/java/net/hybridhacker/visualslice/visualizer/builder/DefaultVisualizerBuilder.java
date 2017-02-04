@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
+import net.hybridhacker.visualslice.visualizer.beat.DrumkitBeatVisualizer;
 import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
@@ -71,6 +72,16 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      */
     public DefaultVisualizerBuilder basicFrequencyLine(final int marginTop, final Color color) {
         this.visualizer = new BasicFrequencyLine(marginTop, color);
+        return this;
+    }
+    
+    /**
+     * Sets a new instance of the {@link DrumkitBeatVisualizer} visualizer as the current visualizer
+     *
+     * @return this builder instance
+     */
+    public DefaultVisualizerBuilder drumKitVisualizer() {
+        this.visualizer = new DrumkitBeatVisualizer();
         return this;
     }
 }
