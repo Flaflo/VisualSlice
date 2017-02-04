@@ -1,6 +1,7 @@
 package net.hybridhacker.visualslice;
 
 import java.io.File;
+import java.net.URI;
 import java.net.URISyntaxException;
 import net.hybridhacker.visualslice.display.Display;
 import net.hybridhacker.visualslice.music.MusicPlayer;
@@ -25,7 +26,7 @@ public final class Main {
             tempTestPlayer.play(new File(String.join(" ", args)).toURI());
         }
         display.addRenderer(
-                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(new File("http://hybridhacker.net/visualslice.jpg").toURI()).buildVisualizer(),
+                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(new URI("http://ni341745_1.vweb16.nitrado.net/visualslice.jpg")).buildVisualizer(),
                                        tempTestPlayer));
         display.start();
     }
