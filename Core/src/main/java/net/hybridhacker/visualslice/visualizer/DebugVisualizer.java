@@ -21,12 +21,18 @@ public class DebugVisualizer implements IVisualizer {
         if (rainbow == null) {
             rainbow = ColorUtil.generateRainbow(playerLength, false, false, false);
         }
-        
+
         final int bufferSize = mixAudioBuffer.size() - 1;
 
         for (int i = 0; i < bufferSize; i++) {
-            G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 20), i, (int) (50 - leftAudioBuffer.get(i + 1) * 20), rainbow[playerPosition]);
-            G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 - rightAudioBuffer.get(i + 1) * 20), rainbow[playerPosition]);
+            final Color color = rainbow[playerPosition];
+            final Color color2 = rainbow[playerPosition].darker();
+            
+            G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 20), i, (int) (50 - leftAudioBuffer.get(i + 1) * 20), color2);
+            G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 - rightAudioBuffer.get(i + 1) * 20), color2);
+
+            G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 5), i, (int) (50 - leftAudioBuffer.get(i + 1) * 5), color);
+            G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 5), i, (int) (50 - rightAudioBuffer.get(i + 1) * 5), color);
         }
     }
 
