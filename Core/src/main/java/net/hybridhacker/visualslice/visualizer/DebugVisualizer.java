@@ -24,7 +24,7 @@ public class DebugVisualizer implements IVisualizer {
 
         final int bufferSize = mixAudioBuffer.size();
 
-        final Color color = rainbow[playerPosition];
+        final Color color = Color.getHSBColor(0.72F, 0.55F, 0.4F);
         final Color color2 = color.darker();
 
         { //Volume
