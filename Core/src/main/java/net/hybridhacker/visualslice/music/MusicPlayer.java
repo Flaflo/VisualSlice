@@ -6,10 +6,11 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.io.File;
 import java.net.URI;
 import java.util.Optional;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * A simple file music player
@@ -99,12 +100,12 @@ public class MusicPlayer implements IMusicPlayer, AudioListener {
 
     @Override
     public Optional<BeatDetect> getBeatDetect() {
-        return this.audioPlayer != null ? Optional.of(this.beatDetect) : Optional.empty();
+        return Optional.ofNullable(this.beatDetect);
     }
 
     @Override
     public Optional<FFT> getFFT() {
-        return this.audioPlayer != null ? Optional.of(this.fft) : Optional.empty();
+        return Optional.ofNullable(this.fft);
     }
 
     @Override
