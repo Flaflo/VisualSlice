@@ -13,13 +13,13 @@ import java.util.Map;
  */
 public class VisualizerRegistry {
     
-    private static final VisualizerRegistry visualizerRegistry;
+    private static final VisualizerRegistry instance;
     
     private final List<IVisualizer> visualizerList = new ArrayList<>();
     private final Map<IVisualizer, Setting[]> visualizerSettings = new HashMap<>();
     
     static {
-        visualizerRegistry = new VisualizerRegistry();
+        instance = new VisualizerRegistry();
     }
     
     private VisualizerRegistry() {
@@ -29,8 +29,8 @@ public class VisualizerRegistry {
     /**
      * @return the singleton instance of the visualizer registry
      */
-    public static VisualizerRegistry getVisualizerRegistry() {
-        return visualizerRegistry;
+    public static VisualizerRegistry getInstance() {
+        return instance;
     }
     
     /**
