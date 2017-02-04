@@ -25,7 +25,7 @@ public final class Main {
             tempTestPlayer.play(new File(String.join(" ", args)).toURI());
         }
         display.addRenderer(
-                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(new File("D:\\DOWENLOAADS\\Daily Wallpaper Earth at Night  I Like To Waste My Time.jpg").toURI()).buildVisualizer(),
+                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(new File("http://hybridhacker.net/visualslice.jpg").toURI()).buildVisualizer(),
                                        tempTestPlayer));
         display.start();
     }
