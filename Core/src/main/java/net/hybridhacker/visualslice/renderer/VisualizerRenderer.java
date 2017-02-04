@@ -17,9 +17,10 @@ public class VisualizerRenderer implements Runnable {
     public void run() {
         // TODO add present checks for beat detect and fft
         if (!musicPlayer.getMixedAudioBuffer().isPresent() || !musicPlayer.getLeftAudioBuffer().isPresent() ||
-            !musicPlayer.getRightAudioBuffer().isPresent()) return;
+            !musicPlayer.getRightAudioBuffer().isPresent() || !musicPlayer.getLength().isPresent() ||
+            !musicPlayer.getPosition().isPresent()) return;
     
-        this.visualizer.onDraw(musicPlayer.getLeftAudioBuffer().get(), musicPlayer.getRightAudioBuffer().get(),
+        this.visualizer.onDraw(musicPlayer.getLength().get(), musicPlayer.getPosition().get(), musicPlayer.getLeftAudioBuffer().get(), musicPlayer.getRightAudioBuffer().get(),
                                musicPlayer.getMixedAudioBuffer().get(), musicPlayer.getBeatDetect().get(), musicPlayer.getFFT().get());
     }
 }

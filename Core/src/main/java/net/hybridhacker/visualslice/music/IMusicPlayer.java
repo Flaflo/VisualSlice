@@ -3,7 +3,6 @@ package net.hybridhacker.visualslice.music;
 import ddf.minim.AudioBuffer;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
-
 import java.net.URI;
 import java.util.Optional;
 
@@ -28,6 +27,16 @@ public interface IMusicPlayer {
      * Toggle pause state of the music player
      */
     void pause();
+    
+    /**
+     * @return the player track length
+     */
+    public Optional<Integer> getLength();
+    
+    /**
+     * @return the current player position on track
+     */
+    public Optional<Integer> getPosition();
     
     /**
      * @return the left audio buffer of the player or null, if no track is played
