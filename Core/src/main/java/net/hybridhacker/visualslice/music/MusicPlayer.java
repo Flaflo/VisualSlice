@@ -1,23 +1,26 @@
 package net.hybridhacker.visualslice.music;
 
 import ddf.minim.AudioBuffer;
+import ddf.minim.AudioListener;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.File;
 import java.net.URI;
 import java.util.Optional;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * A simple file music player
  */
-public class MusicPlayer implements IMusicPlayer {
+public class MusicPlayer implements IMusicPlayer, AudioListener {
 
     private final Minim minim;
     private AudioPlayer audioPlayer;
+
+    private FFT fft;
+    private BeatDetect beatDetect;
 
     /**
      * Initialize a new audio player
@@ -39,6 +42,11 @@ public class MusicPlayer implements IMusicPlayer {
 
         this.audioPlayer = minim.loadFile(audioFile.getAbsolutePath());
         this.audioPlayer.play();
+
+        this.fft = new FFT(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
+        this.beatDetect = new BeatDetect(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
+
+        this.audioPlayer.addListener(this);
     }
 
     /**
@@ -53,17 +61,17 @@ public class MusicPlayer implements IMusicPlayer {
     public void pause() {
         throw new NotImplementedException();
     }
-    
+
     @Override
     public void setVolume(final float volume) {
         throw new NotImplementedException();
     }
-    
+
     @Override
     public float getVolume() {
         throw new NotImplementedException();
     }
-    
+
     @Override
     public Optional<Integer> getLength() {
         return this.audioPlayer != null ? Optional.of(this.audioPlayer.length()) : Optional.empty();
@@ -91,13 +99,30 @@ public class MusicPlayer implements IMusicPlayer {
 
     @Override
     public Optional<BeatDetect> getBeatDetect() {
-        // TODO generate beat detect
-        return Optional.empty();
+        return this.audioPlayer != null ? Optional.of(this.beatDetect) : Optional.empty();
     }
 
     @Override
     public Optional<FFT> getFFT() {
-        // TODO register fft
-        return Optional.empty();
+        return this.audioPlayer != null ? Optional.of(this.fft) : Optional.empty();
+    }
+
+    @Override
+    public void samples(float[] mono) {
+        this.analizeBeat();
+    }
+
+    @Override
+    public void samples(float[] left, float[] right) {
+        this.analizeBeat();
+    }
+
+    /**
+     * Analies the beat with the beat detect class
+     */
+    private void analizeBeat() {
+        if (this.getBeatDetect().isPresent() && this.getMixedAudioBuffer().isPresent()) {
+            this.getBeatDetect().get().detect(this.getMixedAudioBuffer().get());
+        }
     }
 }

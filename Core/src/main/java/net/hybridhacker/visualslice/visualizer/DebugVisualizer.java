@@ -22,9 +22,9 @@ public class DebugVisualizer implements IVisualizer {
             rainbow = ColorUtil.generateRainbow(playerLength, false, false, false);
         }
 
-        final int bufferSize = mixAudioBuffer.size() - 1;
+        final int bufferSize = mixAudioBuffer.size();
 
-        for (int i = 0; i < bufferSize; i++) {
+        for (int i = 0; i < bufferSize - 1; i++) {
             final Color color = rainbow[playerPosition];
             final Color color2 = rainbow[playerPosition].darker();
             
