@@ -40,13 +40,13 @@ public class DebugVisualizer implements IVisualizer {
         { //FFT Bands
             final double scale = 0.8;
             final int min = 2;
-            final int step = 5;
-            final int gap = 1;
+            final int width = 8;
+            final int gap = 3;
 
-            for (int i = 0; i < G2D.canvas().getWidth() / (step + gap); i++) {
-                final int band = (int) Math.max(fft.getBand(i * step) * scale, min);
+            for (int i = 0; i < G2D.canvas().getWidth() / (width + gap); i++) {
+                final int band = (int) Math.max(fft.getBand(i * width) * scale, min);
 
-                G2D.rect(i * (step + gap), G2D.canvas().getHeight() - band, step, band, color2);
+                G2D.rect(i * (width + gap), G2D.canvas().getHeight() - band, width, band, color2);
             }
         }
 
