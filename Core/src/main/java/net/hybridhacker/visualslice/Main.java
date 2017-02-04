@@ -1,20 +1,20 @@
 package net.hybridhacker.visualslice;
 
-import net.hybridhacker.visualslice.display.Display;
-import net.hybridhacker.visualslice.music.MusicPlayer;
-import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
-import net.hybridhacker.visualslice.utils.CommandLineInterface;
-import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
-import org.apache.commons.cli.MissingArgumentException;
-import org.apache.commons.cli.MissingOptionException;
-import org.apache.commons.cli.ParseException;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javax.imageio.ImageIO;
+import net.hybridhacker.visualslice.display.Display;
+import net.hybridhacker.visualslice.music.MusicPlayer;
+import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
+import net.hybridhacker.visualslice.utils.ColorUtil;
+import net.hybridhacker.visualslice.utils.CommandLineInterface;
+import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+import org.apache.commons.cli.MissingArgumentException;
+import org.apache.commons.cli.MissingOptionException;
+import org.apache.commons.cli.ParseException;
 
 /**
  * Application's main class
@@ -80,7 +80,7 @@ public final class Main {
         }
     
         display.addRenderer(
-                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(theImage).buildVisualizer(), tempTestPlayer));
+                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(theImage).buildVisualizer(), tempTestPlayer));
         display.start();
     
         // setup music player
