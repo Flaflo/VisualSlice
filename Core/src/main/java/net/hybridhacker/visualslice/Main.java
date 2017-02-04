@@ -89,8 +89,8 @@ public final class Main {
         }
     
         display.addRenderer(new VisualizerRenderer(
-                new DefaultVisualizerBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(theImage).buildVisualizer(),
-                tempTestPlayer));
+                new DefaultVisualizerBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(new URI(resources[1]))
+                                              .buildVisualizer(), tempTestPlayer));
         display.start();
     
         // setup music player
