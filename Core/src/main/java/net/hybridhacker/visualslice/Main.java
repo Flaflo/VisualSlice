@@ -5,8 +5,11 @@ import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.utils.ColorUtil;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
+import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
 import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
+import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
 import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.MissingOptionException;
@@ -51,9 +54,9 @@ public final class Main {
         commandLineInterface.addOption("f", "the music file to play", "file", true,
                                        file -> resources[0] = file.isPresent() ? file.get() : resources[0]);
     
-        commandLineInterface.addOption("img", "background image URI", "image", true,
-                                       uri -> resources[1] = uri.isPresent() ? uri.get() : resources[1]);
-    
+        commandLineInterface
+                .addOption("img", "background image URI", "image", true, uri -> resources[1] = uri.isPresent() ? uri.get() : resources[1]);
+        
         // shortcut for help page printing
         if (args[0].equalsIgnoreCase("--help")) {
             commandLineInterface.printHelp();
@@ -69,7 +72,8 @@ public final class Main {
             System.err.println("Try --help for more information");
             return;
         } catch (final MissingArgumentException e) {
-            System.err.println("Missing required argument \"" + e.getOption().getArgName() + "\" for option: " + e.getOption().getLongOpt());
+            System.err
+                    .println("Missing required argument \"" + e.getOption().getArgName() + "\" for option: " + e.getOption().getLongOpt());
             System.err.println("Try --help for more information");
             return;
         }
@@ -83,8 +87,9 @@ public final class Main {
             e.printStackTrace();
         }
     
-        display.addRenderer(
-                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(theImage).buildVisualizer(), tempTestPlayer));
+        display.addRenderer(new VisualizerRenderer(
+                new DefaultVisualizerBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(theImage).buildVisualizer(),
+                tempTestPlayer));
         display.start();
     
         // setup music player
@@ -96,5 +101,8 @@ public final class Main {
      */
     public static void registerDefaultVisualizers() {
         VisualizerRegistry.getInstance().registerVisualizer(new BasicFrequencyLine());
+    
+        DecoratorRegistry.getInstance().registerDecorator(new ImageBackgroundDecorator(null));
+        DecoratorRegistry.getInstance().registerDecorator(new PlainBackgroundDecorator(null));
     }
 }
