@@ -30,6 +30,12 @@ public class DecoratorRegistry {
         return instance;
     }
     
+    /**
+     * Register a decorator using a prototype instance of it. This instance should not be used after registration and may not contain any
+     * embedded visualizer since that is not needed
+     *
+     * @param prototype an instance of the decorator type to register
+     */
     public void registerDecorator(final AbstractVisualizerDecorator prototype) {
         this.registeredDecorators.put(prototype.getName(), prototype::create);
     }
