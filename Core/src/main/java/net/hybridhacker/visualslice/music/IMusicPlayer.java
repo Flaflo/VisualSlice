@@ -1,7 +1,6 @@
 package net.hybridhacker.visualslice.music;
 
 import ddf.minim.AudioBuffer;
-import ddf.minim.AudioPlayer;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
 import java.net.URI;
@@ -53,11 +52,6 @@ public interface IMusicPlayer {
      * @return the mixed audio buffer of the player or null, if no track is played
      */
     Optional<AudioBuffer> getMixedAudioBuffer();
-    
-    /**
-     * @return the audio player
-     */
-    Optional<AudioPlayer> getAudioPlayer();
     
     /**
      * @return get the {@link BeatDetect} analysis object of the currently played track or null if no track is playing

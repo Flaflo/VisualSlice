@@ -43,6 +43,7 @@ public class MusicPlayer implements IMusicPlayer {
     /**
      * Stop and close the audio player
      */
+    @Override
     public void stop() {
         this.audioPlayer.close();
     }
@@ -54,52 +55,27 @@ public class MusicPlayer implements IMusicPlayer {
 
     @Override
     public Optional<Integer> getLength() {
-        if (this.getAudioPlayer().isPresent()) {
-            return Optional.ofNullable(this.getAudioPlayer().get().length());
-        } else {
-            return Optional.empty();
-        }
+        return this.audioPlayer != null ? Optional.of(this.audioPlayer.length()) : Optional.empty();
     }
 
     @Override
     public Optional<Integer> getPosition() {
-        if (this.getAudioPlayer().isPresent()) {
-            return Optional.ofNullable(this.getAudioPlayer().get().position());
-        } else {
-            return Optional.empty();
-        }
+        return this.audioPlayer != null ? Optional.of(this.audioPlayer.position()) : Optional.empty();
     }
 
     @Override
     public Optional<AudioBuffer> getRightAudioBuffer() {
-        if (this.getAudioPlayer().isPresent()) {
-            return Optional.ofNullable(this.getAudioPlayer().get().right);
-        } else {
-            return Optional.empty();
-        }
+        return this.audioPlayer != null ? Optional.of(this.audioPlayer.right) : Optional.empty();
     }
 
     @Override
     public Optional<AudioBuffer> getLeftAudioBuffer() {
-        if (this.getAudioPlayer().isPresent()) {
-            return Optional.ofNullable(this.getAudioPlayer().get().left);
-        } else {
-            return Optional.empty();
-        }
+        return this.audioPlayer != null ? Optional.of(this.audioPlayer.left) : Optional.empty();
     }
 
     @Override
     public Optional<AudioBuffer> getMixedAudioBuffer() {
-        if (this.getAudioPlayer().isPresent()) {
-            return Optional.ofNullable(this.getAudioPlayer().get().mix);
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public Optional<AudioPlayer> getAudioPlayer() {
-        return Optional.ofNullable(this.audioPlayer);
+        return this.audioPlayer != null ? Optional.of(this.audioPlayer.right) : Optional.empty();
     }
 
     @Override
