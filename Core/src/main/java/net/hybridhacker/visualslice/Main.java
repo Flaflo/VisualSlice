@@ -1,20 +1,23 @@
 package net.hybridhacker.visualslice;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import javax.imageio.ImageIO;
 import net.hybridhacker.visualslice.display.Display;
 import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.utils.ColorUtil;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
+import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
 import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
 import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.ParseException;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Application's main class
@@ -29,6 +32,8 @@ public final class Main {
      * @param args terminal arguments
      */
     public static void main(final String... args) throws URISyntaxException, ParseException {
+        // register the application's visualizers
+        registerDefaultVisualizers();
     
         final CommandLineInterface commandLineInterface = new CommandLineInterface();
     
@@ -54,7 +59,7 @@ public final class Main {
             commandLineInterface.printHelp();
             return;
         }
-        
+    
         // parse command line
         try {
             commandLineInterface.parse(args);
@@ -64,12 +69,11 @@ public final class Main {
             System.err.println("Try --help for more information");
             return;
         } catch (final MissingArgumentException e) {
-            System.err
-                    .println("Missing required argument \"" + e.getOption().getArgName() + "\" for option: " + e.getOption().getLongOpt());
+            System.err.println("Missing required argument \"" + e.getOption().getArgName() + "\" for option: " + e.getOption().getLongOpt());
             System.err.println("Try --help for more information");
             return;
         }
-        
+    
         // setup display
         final Display display = new Display("VisualSlice", displaySettings[0], displaySettings[1], displaySettings[0]);
         BufferedImage theImage = null;
@@ -85,5 +89,12 @@ public final class Main {
     
         // setup music player
         tempTestPlayer.play(new File(resources[0]).toURI());
+    }
+    
+    /**
+     * Register all visualizers provided by default
+     */
+    public static void registerDefaultVisualizers() {
+        VisualizerRegistry.getInstance().registerVisualizer(new BasicFrequencyLine());
     }
 }
