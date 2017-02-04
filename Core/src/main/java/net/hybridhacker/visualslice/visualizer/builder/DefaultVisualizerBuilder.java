@@ -4,6 +4,7 @@ import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
+import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -61,6 +62,16 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      */
     public DefaultVisualizerBuilder debugVisualizer() {
         this.visualizer = new DebugVisualizer();
+        return this;
+    }
+    
+    /**
+     * Sets a new instance of the {@link BasicFrequencyLine} visualizer as the current visualizer
+     *
+     * @return this builder instance
+     */
+    public DefaultVisualizerBuilder basicFrequencyLine(final Color color) {
+        this.visualizer = new BasicFrequencyLine(color);
         return this;
     }
 }
