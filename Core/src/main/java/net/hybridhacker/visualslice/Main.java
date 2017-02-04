@@ -30,28 +30,31 @@ public final class Main {
     
         final CommandLineInterface commandLineInterface = new CommandLineInterface();
     
-        final int[] dimensions = {800, 250};
-        commandLineInterface.addOption("w", "set the GUI width", "width", false,
-                                       width -> dimensions[0] = width.isPresent() ? Integer.parseInt(width.get()) : dimensions[0]);
-        commandLineInterface.addOption("h", "set the GUI height", "height", false,
-                                       height -> dimensions[1] = height.isPresent() ? Integer.parseInt(height.get()) : dimensions[1]);
+        // display settings from command line
+        final int[] displaySettings = {800, 250, 120};
+        commandLineInterface.addOption("w", "set the GUI width", "width", false, width -> displaySettings[0] =
+                width.isPresent() ? Integer.parseInt(width.get()) : displaySettings[0]);
+        commandLineInterface.addOption("h", "set the GUI height", "height", false, height -> displaySettings[1] =
+                height.isPresent() ? Integer.parseInt(height.get()) : displaySettings[1]);
+        commandLineInterface.addOption("fps", "the frames per second", "fps", false, frames -> displaySettings[2] =
+                frames.isPresent() ? Integer.parseInt(frames.get()) : displaySettings[2]);
     
-        final String[] filename = new String[] {""};
-        commandLineInterface
-                .addOption("f", "the music file to play", "file", true, file -> filename[0] = file.isPresent() ? file.get() : filename[0]);
+        // resources from command line
+        final String[] resources = new String[] {"", ""};
+        commandLineInterface.addOption("f", "the music file to play", "file", true,
+                                       file -> resources[0] = file.isPresent() ? file.get() : resources[0]);
     
-        final int[] fps = {120};
-        commandLineInterface.addOption("fps", "the frames per second", "fps", false,
-                                       frames -> fps[0] = frames.isPresent() ? Integer.parseInt(frames.get()) : fps[0]);
+        commandLineInterface.addOption("img", "background image URI", "image", true,
+                                       file -> resources[1] = file.isPresent() ? file.get() : resources[1]);
     
+        // parse command line
         commandLineInterface.parse(args);
     
-        final Display display = new Display("VisualSlice", dimensions[0], dimensions[1], fps[0]);
-        tempTestPlayer.play(new File(filename[0]).toURI());
-        
+        // setup display
+        final Display display = new Display("VisualSlice", displaySettings[0], displaySettings[1], displaySettings[0]);
         BufferedImage theImage = null;
         try {
-            theImage = ImageIO.read(new URI("http://ni341745_1.vweb16.nitrado.net/visualslice.jpg").toURL());
+            theImage = ImageIO.read(new URI(resources[1]).toURL());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,5 +62,8 @@ public final class Main {
         display.addRenderer(
                 new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().image(theImage).buildVisualizer(), tempTestPlayer));
         display.start();
+    
+        // setup music player
+        tempTestPlayer.play(new File(resources[0]).toURI());
     }
 }
