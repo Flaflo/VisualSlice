@@ -5,6 +5,7 @@ import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
 import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.ParseException;
 
@@ -54,6 +55,11 @@ public final class Main {
         } catch (final MissingOptionException e) {
             //noinspection unchecked
             System.err.println("Missing required command line option(s): " + String.join(", ", e.getMissingOptions()));
+            System.err.println("Try --help for more information");
+            return;
+        } catch (final MissingArgumentException e) {
+            System.err
+                    .println("Missing required argument \"" + e.getOption().getArgName() + "\" for option: " + e.getOption().getLongOpt());
             System.err.println("Try --help for more information");
             return;
         }
