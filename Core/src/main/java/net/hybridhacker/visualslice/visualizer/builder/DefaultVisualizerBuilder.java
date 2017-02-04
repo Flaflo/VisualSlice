@@ -70,8 +70,8 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder basicFrequencyLine(final Color color) {
-        this.visualizer = new BasicFrequencyLine(color);
+    public DefaultVisualizerBuilder basicFrequencyLine(final int marginTop, final Color color) {
+        this.visualizer = new BasicFrequencyLine(marginTop, color);
         return this;
     }
 }
