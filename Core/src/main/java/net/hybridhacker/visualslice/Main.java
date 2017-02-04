@@ -5,6 +5,7 @@ import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.utils.ColorUtil;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
+import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
 import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
@@ -100,6 +101,7 @@ public final class Main {
      * Register all visualizers provided by default
      */
     public static void registerDefaultVisualizers() {
+        VisualizerRegistry.getInstance().registerVisualizer(new DebugVisualizer());
         VisualizerRegistry.getInstance().registerVisualizer(new BasicFrequencyLine());
     
         DecoratorRegistry.getInstance().registerDecorator(new ImageBackgroundDecorator(null));

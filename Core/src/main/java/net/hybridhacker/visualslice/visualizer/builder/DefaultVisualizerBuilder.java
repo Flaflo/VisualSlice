@@ -37,8 +37,8 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      */
     public DefaultVisualizerBuilder image(final BufferedImage image) {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
-        
-        this.visualizer = new ImageBackgroundDecorator(this.visualizer, image);
+    
+        this.visualizer = new ImageBackgroundDecorator(this.visualizer);
         return this;
     }
     
@@ -51,8 +51,8 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      */
     public DefaultVisualizerBuilder background(final Color color) {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
-        
-        this.visualizer = new PlainBackgroundDecorator(this.visualizer, color);
+    
+        this.visualizer = new PlainBackgroundDecorator(this.visualizer);
         return this;
     }
     
@@ -62,7 +62,8 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      * @return this builder instance
      */
     public DefaultVisualizerBuilder debugVisualizer(final Color color) {
-        this.visualizer = new DebugVisualizer(color);
+        this.visualizer = new DebugVisualizer();
+        ((DebugVisualizer) this.visualizer).setColor(color);
         return this;
     }
     

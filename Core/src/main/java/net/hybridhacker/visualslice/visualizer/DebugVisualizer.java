@@ -3,7 +3,8 @@ package net.hybridhacker.visualslice.visualizer;
 import ddf.minim.AudioBuffer;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import net.hybridhacker.visualslice.utils.FXUtil;
 import net.hybridhacker.visualslice.utils.G2D;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
@@ -13,11 +14,16 @@ import java.awt.*;
 /**
  * A visualizer for debugging purpose
  */
-@Data
 public class DebugVisualizer implements IVisualizer {
-
-    private final Color color;
-
+    
+    @Setter
+    @Getter
+    private Color color;
+    
+    public DebugVisualizer() {
+        this.color = Color.BLACK;
+    }
+    
     @Override
     public void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer,
             final BeatDetect beatDetect, final FFT fft) {
