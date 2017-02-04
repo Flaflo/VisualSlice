@@ -27,19 +27,35 @@ public class DebugVisualizer implements IVisualizer {
         final Color color = rainbow[playerPosition];
         final Color color2 = color.darker();
 
-        for (int i = 0; i < bufferSize - 1; i++) {
-            G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 20), i, (int) (50 - leftAudioBuffer.get(i + 1) * 20), color2);
-            G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 - rightAudioBuffer.get(i + 1) * 20), color2);
+        { //Volume
+            for (int i = 0; i < bufferSize - 1; i++) {
+                G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 20), i, (int) (50 - leftAudioBuffer.get(i + 1) * 20), color2);
+                G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 - rightAudioBuffer.get(i + 1) * 20), color2);
 
-            G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 5), i, (int) (50 - leftAudioBuffer.get(i + 1) * 5), color);
-            G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 5), i, (int) (50 - rightAudioBuffer.get(i + 1) * 5), color);
+                G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 5), i, (int) (50 - leftAudioBuffer.get(i + 1) * 5), color);
+                G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 5), i, (int) (50 - rightAudioBuffer.get(i + 1) * 5), color);
+            }
         }
 
-        final int step = 10;
-        for (int i = 0; i < G2D.canvas().getWidth() / (step + 1); i++) {
-            final int band = (int) Math.max(fft.getBand(i) * 0.8, 2);
+        { //FFT Bands
+            final double scale = 0.8;
+            final int min = 2;
+            final int step = 5;
+            final int gap = 1;
 
-            G2D.rect(i * (step + 1), G2D.canvas().getHeight() - band, step, band, color2);
+            for (int i = 0; i < G2D.canvas().getWidth() / (step + gap); i++) {
+                final int band = (int) Math.max(fft.getBand(i * step) * scale, min);
+
+                G2D.rect(i * (step + gap), G2D.canvas().getHeight() - band, step, band, color2);
+            }
+        }
+
+        { //Player progress 
+            final int width = (int) Math.round(((double) playerPosition / (double) playerLength)* G2D.canvas().getWidth());
+            final int height = 4;
+            
+            G2D.rect(0, 0, G2D.canvas().getWidth(), height, color2);
+            G2D.rect(0, 0, width, height, color);
         }
     }
 
