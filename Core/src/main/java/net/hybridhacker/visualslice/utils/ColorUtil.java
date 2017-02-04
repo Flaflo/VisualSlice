@@ -2,12 +2,13 @@ package net.hybridhacker.visualslice.utils;
 
 import java.awt.Color;
 import java.awt.color.ColorSpace;
+import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Color utilities class.
  *
- * @author Stephane
+ * @author Stephane, Flaflo
  */
 public class ColorUtil {
 
@@ -402,7 +403,7 @@ public class ColorUtil {
     }
 
     private static float pivotXYZ(float value) {
-        return (value > 0.008856f) ? (float) cubicRoot(value) : (7.787f * value) + 0.1379f;
+        return (value > 0.008856f) ? (float) MathUtil.cubicRoot(value) : (7.787f * value) + 0.1379f;
     }
 
     /**
@@ -590,9 +591,27 @@ public class ColorUtil {
     }
 
     /**
-     * Calculate the cubic root of the specified value.
+     * Returns an average color from a buffered image
+     *
+     * @param image the image to scan
+     * @return the average color
      */
-    private static double cubicRoot(double value) {
-        return Math.pow(value, 1d / 3d);
+    public static Color getAverageColor(final BufferedImage image) {
+        long sumRed = 0, sumGreen = 0, sumBlue = 0, sumAlpha = 0;
+
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                final Color color = new Color(image.getRGB(x, y));
+                
+                sumRed += color.getRed();
+                sumGreen += color.getGreen();
+                sumBlue += color.getBlue();
+                sumAlpha += color.getAlpha();
+            }
+        }
+
+        final int pixels = image.getWidth() * image.getHeight();
+        
+        return new Color((int) sumRed / pixels, (int) sumGreen / pixels, (int) sumBlue / pixels, (int) sumAlpha / pixels);
     }
 }
