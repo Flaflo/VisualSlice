@@ -1,13 +1,12 @@
 package net.hybridhacker.visualslice;
 
+import java.awt.*;
+import java.io.File;
 import net.hybridhacker.visualslice.display.Display;
 import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
-
-import java.awt.*;
-import java.io.File;
 
 /**
  * Application's main class
