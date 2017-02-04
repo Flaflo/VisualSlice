@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 public abstract class AbstractVisualizerDecorator implements IVisualizer {
     
     @Getter
-    private IVisualizer visualizer;
+    private final IVisualizer visualizer;
     
     @Override
     public final void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
