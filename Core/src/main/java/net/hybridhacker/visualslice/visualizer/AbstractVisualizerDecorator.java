@@ -5,6 +5,7 @@ import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.hybridhacker.visualslice.visualizer.settings.Setting;
 
 /**
  * A decorator for visualizers that can decorate extra output to existing visualizers
@@ -33,5 +34,10 @@ public abstract class AbstractVisualizerDecorator implements IVisualizer {
     @Override
     public final String getName() {
         return this.visualizer.getName();
+    }
+    
+    @Override
+    public final Setting<?>[] getSettings() {
+        return this.visualizer.getSettings();
     }
 }

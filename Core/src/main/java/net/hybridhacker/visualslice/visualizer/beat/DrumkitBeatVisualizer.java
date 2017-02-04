@@ -6,6 +6,7 @@ import ddf.minim.analysis.FFT;
 import lombok.RequiredArgsConstructor;
 import net.hybridhacker.visualslice.utils.G2D;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
+import net.hybridhacker.visualslice.visualizer.settings.Setting;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -67,6 +68,11 @@ public class DrumkitBeatVisualizer implements IVisualizer {
     @Override
     public String getName() {
         return "Drum Kit";
+    }
+    
+    @Override
+    public Setting<?>[] getSettings() {
+        return new Setting<?>[0];
     }
     
     @RequiredArgsConstructor

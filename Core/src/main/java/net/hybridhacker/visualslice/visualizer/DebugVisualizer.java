@@ -3,10 +3,12 @@ package net.hybridhacker.visualslice.visualizer;
 import ddf.minim.AudioBuffer;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
-import java.awt.Color;
 import lombok.Data;
 import net.hybridhacker.visualslice.utils.FXUtil;
 import net.hybridhacker.visualslice.utils.G2D;
+import net.hybridhacker.visualslice.visualizer.settings.Setting;
+
+import java.awt.*;
 
 /**
  * A visualizer for debugging purpose
@@ -59,5 +61,10 @@ public class DebugVisualizer implements IVisualizer {
     @Override
     public String getName() {
         return "Debug Visualizer";
+    }
+    
+    @Override
+    public Setting<?>[] getSettings() {
+        return new Setting<?>[0];
     }
 }
