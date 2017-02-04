@@ -1,12 +1,12 @@
 package net.hybridhacker.visualslice;
 
-import java.awt.*;
-import java.io.File;
 import net.hybridhacker.visualslice.display.Display;
 import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
-import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
-import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
+import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+
+import java.awt.*;
+import java.io.File;
 
 /**
  * Application's main class
@@ -25,7 +25,9 @@ public final class Main {
         if (args.length >= 1) {
             tempTestPlayer.play(new File(String.join(" ", args)).toURI());
         }
-        display.addRenderer(new VisualizerRenderer(new PlainBackgroundDecorator(new DebugVisualizer(), Color.BLACK), tempTestPlayer));
+        display.addRenderer(
+                new VisualizerRenderer(new DefaultVisualizerBuilder().debugVisualizer().background(Color.BLACK).buildVisualizer(),
+                                       tempTestPlayer));
         display.start();
     }
 }
