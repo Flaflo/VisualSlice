@@ -131,18 +131,18 @@ public class MusicPlayer implements AudioListener {
     
     @Override
     public void samples(float[] mono) {
-        this.analizeBeat();
+        this.analyzeBeat();
     }
     
     @Override
     public void samples(float[] left, float[] right) {
-        this.analizeBeat();
+        this.analyzeBeat();
     }
     
     /**
      * Analies the beat with the beat detect class
      */
-    private void analizeBeat() {
+    private void analyzeBeat() {
         if (this.getBeatDetect().isPresent() && this.getMixedAudioBuffer().isPresent()) {
             this.getBeatDetect().get().detect(this.getMixedAudioBuffer().get());
         }
