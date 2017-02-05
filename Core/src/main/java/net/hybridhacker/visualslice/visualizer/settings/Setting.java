@@ -28,12 +28,20 @@ public class Setting<T extends Serializable> {
     }
     
     /**
-     * Sets the setting value and updates the visualizer via the consumer
+     * Sets the setting value and updates the visualizer via the consumer.
+     * <p>
+     * Note: Due to the lack of useful generics in Java this method accepts an object and casts it to its generic type. It is expected,
+     * that this cast works.
      *
      * @param value new value for this setting
      */
-    public void setValue(final T value) {
-        this.value = value;
-        if (settingUpdater != null) settingUpdater.accept(value);
+    @SuppressWarnings("unchecked")
+    public void setValue(final Object value) {
+        this.value = (T) value;
+        if (settingUpdater != null) settingUpdater.accept((T) value);
+    }
+    
+    public T getValue() {
+        return this.value;
     }
 }

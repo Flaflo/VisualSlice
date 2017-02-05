@@ -5,9 +5,12 @@ import lombok.Setter;
 import net.hybridhacker.visualslice.visualizer.AbstractVisualizerDecorator;
 import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
+import net.hybridhacker.visualslice.visualizer.settings.Setting;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A generic builder that can build decorated visualizers out of any visualizers and decorators that are registered
@@ -18,7 +21,8 @@ public class GenericBuilder implements VisualizerBuilder {
     @Setter
     public IVisualizer visualizer = null;
     
-    public List<String> decorators = new ArrayList<>();
+    private final List<String> decorators = new ArrayList<>();
+    private final Map<String, AbstractVisualizerDecorator> decoratorPrototypes = new HashMap<>();
     
     public GenericBuilder() {
         
@@ -33,8 +37,12 @@ public class GenericBuilder implements VisualizerBuilder {
         for (String decoratorName : decorators) {
             final AbstractVisualizerDecorator decorator =
                     DecoratorRegistry.getInstance().createNewDecorator(decoratorName, hithertoVisualizer);
+    
+            final Setting[] prototypeSettings = this.getDecoratorSettings(decoratorName);
+            for (int i = 0; i < prototypeSettings.length; i++) {
+                decorator.getSettings()[i].setValue(prototypeSettings[i].getValue());
+            }
             
-            // TODO settings
             hithertoVisualizer = decorator;
         }
         
@@ -48,6 +56,7 @@ public class GenericBuilder implements VisualizerBuilder {
      */
     public void addDecorator(final String decorator) {
         this.decorators.add(decorator);
+        this.decoratorPrototypes.put(decorator, DecoratorRegistry.getInstance().createNewDecorator(decorator, null));
     }
     
     /**
@@ -57,5 +66,15 @@ public class GenericBuilder implements VisualizerBuilder {
      */
     public void removeDecorator(final String decorator) {
         this.decorators.remove(decorator);
+        this.decoratorPrototypes.remove(decorator);
+    }
+    
+    /**
+     * @param name name of a decorator
+     *
+     * @return an array of settings assigned to the decorator with given name
+     */
+    public Setting<?>[] getDecoratorSettings(final String name) {
+        return this.decoratorPrototypes.get(name).getSettings();
     }
 }
