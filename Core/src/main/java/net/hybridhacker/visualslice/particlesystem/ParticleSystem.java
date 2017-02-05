@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * A basic particle system initialized with some consumers that will handle the system logic
@@ -21,10 +21,10 @@ public class ParticleSystem {
     @Getter
     private final List<Particle> particles = new ArrayList<>();
     
-    private final List<Consumer<Integer>> systemHandlers = new LinkedList<>();
+    private final List<BiConsumer<ParticleSystem, Integer>> systemHandlers = new LinkedList<>();
     
     @SafeVarargs
-    public ParticleSystem(final Consumer<Integer>... handlers) {
+    public ParticleSystem(final BiConsumer<ParticleSystem, Integer>... handlers) {
         this.systemHandlers.addAll(Arrays.asList(handlers));
     }
     
@@ -44,7 +44,7 @@ public class ParticleSystem {
      * @param tick current tick
      */
     protected void doTick(final int tick) {
-        this.systemHandlers.forEach(handler -> handler.accept(tick));
+        this.systemHandlers.forEach(handler -> handler.accept(this, tick));
     }
     
     /**
@@ -52,7 +52,7 @@ public class ParticleSystem {
      *
      * @param handler consumer as system tick handler
      */
-    public void addHandler(final Consumer<Integer> handler) {
+    public void addHandler(final BiConsumer<ParticleSystem, Integer> handler) {
         this.systemHandlers.add(handler);
     }
 }
