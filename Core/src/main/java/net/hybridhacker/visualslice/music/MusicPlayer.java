@@ -70,14 +70,14 @@ public class MusicPlayer implements AudioListener {
      * @param volume a float between 0 and 1
      */
     public void setVolume(final float volume) {
-        throw new NotImplementedException();
+        audioPlayer.setGain((float) (20 * Math.log10(volume)));
     }
     
     /**
      * @return the player's volume between 0 and 1
      */
     public float getVolume() {
-        throw new NotImplementedException();
+        return (float) Math.pow(10, audioPlayer.getGain() / 20);
     }
     
     /**
