@@ -66,5 +66,10 @@
             <artifactId>filters</artifactId>
             <version>2.0.235-1</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>1.0-rc2</version>
+        </dependency>
     </dependencies>
 </project>
