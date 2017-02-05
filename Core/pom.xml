@@ -71,5 +71,11 @@
             <artifactId>auto-service</artifactId>
             <version>1.0-rc2</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.humble</groupId>
+            <artifactId>humble-video-all</artifactId>
+            <version>0.2.1</version>
+        </dependency>
     </dependencies>
 </project>
