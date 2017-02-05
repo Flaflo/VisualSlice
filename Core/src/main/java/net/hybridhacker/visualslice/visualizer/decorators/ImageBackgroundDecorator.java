@@ -28,6 +28,8 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
         super(visualizer);
     }
     
+    private final Setting<?>[] settings = new Setting<?>[] {new Setting<>("Image URI", this.imageUri, this::setImageUri)};
+    
     @Override
     protected void doInitialize() {
         try {
@@ -55,6 +57,6 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
     
     @Override
     public Setting<?>[] getSettings() {
-        return new Setting<?>[] {new Setting<>("Image URI", this.imageUri, this::setImageUri)};
+        return this.settings;
     }
 }

@@ -32,6 +32,12 @@ public class BasicFrequencyLine implements IVisualizer {
     
     @Setter
     private Color color;
+    private final Setting<?>[] settings = new Setting<?>[] {new Setting<>("scale", this.scale, this::setScale),
+                                                            new Setting<>("barMinHeight", this.barMinHeight, this::setBarMinHeight),
+                                                            new Setting<>("barWidth", this.barWidth, this::setBarWidth),
+                                                            new Setting<>("gap", this.gap, this::setGap),
+                                                            new Setting<>("topMargin", this.topMargin, this::setTopMargin),
+                                                            new Setting<>("color", this.color, this::setColor)};
     
     @Override
     public void initialize() {}
@@ -54,10 +60,6 @@ public class BasicFrequencyLine implements IVisualizer {
     
     @Override
     public Setting<?>[] getSettings() {
-        return new Setting<?>[] {new Setting<>("scale", this.scale, this::setScale),
-                                 new Setting<>("barMinHeight", this.barMinHeight, this::setBarMinHeight),
-                                 new Setting<>("barWidth", this.barWidth, this::setBarWidth), new Setting<>("gap", this.gap, this::setGap),
-                                 new Setting<>("topMargin", this.topMargin, this::setTopMargin),
-                                 new Setting<>("color", this.color, this::setColor)};
+        return this.settings;
     }
 }

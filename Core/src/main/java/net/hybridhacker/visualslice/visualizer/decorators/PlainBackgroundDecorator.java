@@ -17,7 +17,8 @@ import java.awt.*;
 public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     
     @Setter
-    private Color color;
+    private Color color = Color.BLACK;
+    private final Setting<?>[] settings = new Setting<?>[] {new Setting<>("Color", this.color, this::setColor)};
     
     public PlainBackgroundDecorator(final IVisualizer visualizer) {
         super(visualizer);
@@ -44,6 +45,6 @@ public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     
     @Override
     public Setting<?>[] getSettings() {
-        return new Setting<?>[] {new Setting<>("Color", this.color, this::setColor)};
+        return this.settings;
     }
 }
