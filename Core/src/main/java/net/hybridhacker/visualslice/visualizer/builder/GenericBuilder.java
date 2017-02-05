@@ -5,6 +5,7 @@ import lombok.Setter;
 import net.hybridhacker.visualslice.visualizer.AbstractVisualizerDecorator;
 import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
+import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class GenericBuilder implements VisualizerBuilder {
     
     @Getter
     @Setter
-    public IVisualizer visualizer = null;
+    private String visulizerName = null;
+    private IVisualizer visualizer = null;
     
     private final List<String> decorators = new ArrayList<>();
     private final Map<String, AbstractVisualizerDecorator> decoratorPrototypes = new HashMap<>();
@@ -30,6 +32,7 @@ public class GenericBuilder implements VisualizerBuilder {
     
     @Override
     public IVisualizer buildVisualizer() {
+        if (this.visulizerName != null) this.visualizer = VisualizerRegistry.getInstance().getVisualizerByName(this.visulizerName);
         if (this.visualizer == null) throw new IllegalStateException("No visualizer chosen");
         
         IVisualizer hithertoVisualizer = this.visualizer;

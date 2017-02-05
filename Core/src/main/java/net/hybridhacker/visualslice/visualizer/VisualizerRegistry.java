@@ -1,7 +1,7 @@
 package net.hybridhacker.visualslice.visualizer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Singleton registry for visualizers
@@ -10,7 +10,7 @@ public class VisualizerRegistry {
     
     private static final VisualizerRegistry instance;
     
-    private final List<IVisualizer> visualizerList = new ArrayList<>();
+    private final Map<String, IVisualizer> visualizers = new HashMap<>();
     
     static {
         instance = new VisualizerRegistry();
@@ -33,13 +33,22 @@ public class VisualizerRegistry {
      * @param visualizer visualizer implementation
      */
     public void registerVisualizer(final IVisualizer visualizer) {
-        this.visualizerList.add(visualizer);
+        this.visualizers.put(visualizer.getName(), visualizer);
     }
     
     /**
      * @return an array of all registered visualizers
      */
-    public IVisualizer[] getRegisteredVisualizers() {
-        return this.visualizerList.toArray(new IVisualizer[this.visualizerList.size()]);
+    public String[] getRegisteredVisualizers() {
+        return this.visualizers.keySet().toArray(new String[this.visualizers.keySet().size()]);
+    }
+    
+    /**
+     * @param visualizer name of a registered visualizer
+     *
+     * @return the visualizer instance with given name or null if no such exists
+     */
+    public IVisualizer getVisualizerByName(final String visualizer) {
+        return this.visualizers.get(visualizer);
     }
 }
