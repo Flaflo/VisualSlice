@@ -43,6 +43,7 @@ public class SimpleParticle extends Particle {
     
     @Override
     protected void onDraw() {
+        this.getPosition().add(this.getVelocity());
         G2D.oval((int) this.getX(), (int) this.getY(), this.size, this.size, this.color);
     }
 }
