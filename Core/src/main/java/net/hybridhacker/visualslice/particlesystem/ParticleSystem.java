@@ -42,4 +42,13 @@ public class ParticleSystem {
     protected void doTick(final int tick) {
         this.systemHandlers.forEach(handler -> handler.accept(tick));
     }
+    
+    /**
+     * Add a handler to the system
+     *
+     * @param handler consumer as system tick handler
+     */
+    public void addHandler(final Consumer<Integer> handler) {
+        this.systemHandlers.add(handler);
+    }
 }
