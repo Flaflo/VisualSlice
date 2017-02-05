@@ -18,11 +18,9 @@ public abstract class AbstractVisualizerDecorator implements IVisualizer {
     @Override
     public final void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer,
                              final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect,
-                             final FFT fft, final int trackLength, final int trackPosition) {
-        this.doDraw(leftAudioBuffer, rightAudioBuffer, mixAudioBuffer, beatDetect, fft, trackLength, trackPosition);
-        this.visualizer
-                .onDraw(playerLength, playerPosition, leftAudioBuffer, rightAudioBuffer, mixAudioBuffer, beatDetect, fft, trackLength,
-                        trackPosition);
+                             final FFT fft) {
+        this.doDraw(leftAudioBuffer, rightAudioBuffer, mixAudioBuffer, beatDetect, fft, playerLength, playerPosition);
+        this.visualizer.onDraw(playerLength, playerPosition, leftAudioBuffer, rightAudioBuffer, mixAudioBuffer, beatDetect, fft);
     }
     
     @Override

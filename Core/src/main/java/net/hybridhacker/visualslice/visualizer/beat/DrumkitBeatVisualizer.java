@@ -25,8 +25,7 @@ public class DrumkitBeatVisualizer implements IVisualizer {
     
     @Override
     public void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer,
-                       final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft,
-                       final int trackLength, final int trackPosition) {
+                       final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
         final int width = G2D.canvas().getWidth();
         final int height = G2D.canvas().getHeight();
         

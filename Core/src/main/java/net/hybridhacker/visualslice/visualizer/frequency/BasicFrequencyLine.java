@@ -38,8 +38,7 @@ public class BasicFrequencyLine implements IVisualizer {
     
     @Override
     public void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer,
-                       final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft,
-                       final int trackLength, final int trackPosition) {
+                       final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
         
         for (int i = 0; i < G2D.canvas().getWidth() / (barWidth + gap); i++) {
             final int band = (int) Math.max(fft.getBand(i * barWidth) * scale, barMinHeight);

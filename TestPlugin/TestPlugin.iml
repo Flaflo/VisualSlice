@@ -24,6 +24,15 @@
     <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235-1" level="project" />
     <orderEntry type="library" name="Maven: com.google.auto.service:auto-service:1.0-rc2" level="project" />
     <orderEntry type="library" name="Maven: com.google.auto:auto-common:0.3" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-all:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-arch-i686-apple-darwin12:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-arch-x86_64-apple-darwin12:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-arch-i686-pc-linux-gnu6:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-arch-x86_64-pc-linux-gnu6:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-arch-i686-w64-mingw32:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-arch-x86_64-w64-mingw32:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: io.humble:humble-video-noarch:0.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.12" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.5" level="project" />

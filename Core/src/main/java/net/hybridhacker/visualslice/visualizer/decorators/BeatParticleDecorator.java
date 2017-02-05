@@ -68,7 +68,7 @@ public class BeatParticleDecorator extends AbstractVisualizerDecorator {
     
     @Override
     public String getName() {
-        return "Beat Particles";
+        return "Beat ";
     }
     
     @Override
