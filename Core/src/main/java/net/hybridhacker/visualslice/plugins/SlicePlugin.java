@@ -11,11 +11,6 @@ public interface SlicePlugin {
     void onEnable();
     
     /**
-     * Called upon plugin disabling.
-     */
-    void onDisable();
-    
-    /**
      * @return the plugin's author (nick-) name
      */
     String getAuthor();

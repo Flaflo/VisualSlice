@@ -14,11 +14,6 @@ public class ExamplePlugin implements SlicePlugin {
     }
     
     @Override
-    public void onDisable() {
-        
-    }
-    
-    @Override
     public String getAuthor() {
         return "Cydhra";
     }
