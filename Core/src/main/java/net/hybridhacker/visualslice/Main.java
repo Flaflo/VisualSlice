@@ -2,6 +2,7 @@ package net.hybridhacker.visualslice;
 
 import net.hybridhacker.visualslice.display.Display;
 import net.hybridhacker.visualslice.music.MusicPlayer;
+import net.hybridhacker.visualslice.plugins.PluginManager;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
 import net.hybridhacker.visualslice.utils.ColorUtil;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
@@ -38,7 +39,8 @@ public final class Main {
     public static void main(final String... args) throws URISyntaxException, ParseException {
         // register the application's visualizers
         registerDefaultVisualizers();
-    
+        PluginManager.getInstance().loadPlugins();
+        
         final CommandLineInterface commandLineInterface = new CommandLineInterface();
     
         // display settings from command line
