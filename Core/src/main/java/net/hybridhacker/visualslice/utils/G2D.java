@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
@@ -11,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Graphics 2D Utility, oriented on LWJGL syntax
@@ -28,6 +30,18 @@ public final class G2D {
 
     private static volatile boolean mouseLeft, mouseRight;
     private static volatile int mouseButton = -1;
+
+    public static BufferedImage canvasTexture() {
+        final BufferedImage bufferedImage = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        final Graphics graphics = bufferedImage.getGraphics();
+        canvas.paintAll(graphics);
+        
+        return bufferedImage;
+    }
+
+    public static Graphics2D graphics() {
+        return graphics;
+    }
 
     public static int mouseButton() {
         return mouseButton;
@@ -239,6 +253,10 @@ public final class G2D {
     }
 
     public static void init(Canvas canvas, int buffers) {
+        final JPanel panel = new JPanel();
+
+        panel.add(canvas);
+
         if (canvas.getBufferStrategy() == null) {
             canvas.createBufferStrategy(buffers);
         }
@@ -250,7 +268,7 @@ public final class G2D {
 
     public static void init(int buffers) {
         frame.add(G2D.canvas(frame.getWidth(), frame.getHeight()));
-        
+
         if (canvas.getBufferStrategy() == null) {
             canvas.createBufferStrategy(buffers);
         }
