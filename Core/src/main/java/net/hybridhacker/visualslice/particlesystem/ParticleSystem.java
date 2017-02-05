@@ -39,7 +39,7 @@ public class ParticleSystem {
      *
      * @param tick current tick
      */
-    public void doTick(final int tick) {
+    protected void doTick(final int tick) {
         this.systemHandlers.forEach(handler -> handler.accept(tick));
     }
 }
