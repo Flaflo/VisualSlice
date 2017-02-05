@@ -63,12 +63,12 @@ public class BeatParticleDecorator extends AbstractVisualizerDecorator {
     
     @Override
     public AbstractVisualizerDecorator create(final IVisualizer embeddedVisualizer) {
-        return null;
+        return new BeatParticleDecorator(embeddedVisualizer);
     }
     
     @Override
     public String getName() {
-        return null;
+        return "Beat Particles";
     }
     
     @Override
