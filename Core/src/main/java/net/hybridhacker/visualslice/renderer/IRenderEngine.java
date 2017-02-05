@@ -26,7 +26,21 @@ public interface IRenderEngine {
      */
     public void endRenderPass();
     
+    /**
+     * Scale the drawing calls by a factor
+     *
+     * @param scaleX x scale factor
+     * @param scaleY y scale factor
+     */
     public void scale(final int scaleX, final int scaleY);
+    
+    /**
+     * Translate drawing calls by an offset
+     *
+     * @param dX x offset
+     * @param dY y offset
+     */
+    public void translate(final int dX, final int dY);
     
     /**
      * @param string a string
