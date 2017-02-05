@@ -45,7 +45,8 @@ public class GenericBuilder implements VisualizerBuilder {
             
             hithertoVisualizer = decorator;
         }
-        
+    
+        hithertoVisualizer.initialize();
         return hithertoVisualizer;
     }
     
