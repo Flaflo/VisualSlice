@@ -13,11 +13,11 @@ import java.net.URI;
 /**
  *
  */
-public class DefaultVisualizerBuilder implements VisualizerBuilder {
+public class DebugBuilder implements VisualizerBuilder {
     
     private IVisualizer visualizer = null;
     
-    public DefaultVisualizerBuilder() {
+    public DebugBuilder() {
         
     }
     
@@ -35,7 +35,7 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder image(final URI image) {
+    public DebugBuilder image(final URI image) {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
     
         ImageBackgroundDecorator decorator = new ImageBackgroundDecorator(this.visualizer);
@@ -51,7 +51,7 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder background(final Color color) {
+    public DebugBuilder background(final Color color) {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
     
         this.visualizer = new PlainBackgroundDecorator(this.visualizer);
@@ -63,7 +63,7 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder debugVisualizer(final Color color) {
+    public DebugBuilder debugVisualizer(final Color color) {
         this.visualizer = new DebugVisualizer();
         ((DebugVisualizer) this.visualizer).setColor(color);
         return this;
@@ -74,7 +74,7 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder basicFrequencyLine(final int marginTop, final Color color) {
+    public DebugBuilder basicFrequencyLine(final int marginTop, final Color color) {
         this.visualizer = new BasicFrequencyLine();
         return this;
     }
@@ -84,7 +84,7 @@ public class DefaultVisualizerBuilder implements VisualizerBuilder {
      *
      * @return this builder instance
      */
-    public DefaultVisualizerBuilder drumKitVisualizer() {
+    public DebugBuilder drumKitVisualizer() {
         this.visualizer = new DrumkitBeatVisualizer();
         return this;
     }

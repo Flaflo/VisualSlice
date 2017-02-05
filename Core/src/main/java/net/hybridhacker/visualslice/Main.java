@@ -8,7 +8,7 @@ import net.hybridhacker.visualslice.utils.CommandLineInterface;
 import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
-import net.hybridhacker.visualslice.visualizer.builder.DefaultVisualizerBuilder;
+import net.hybridhacker.visualslice.visualizer.builder.DebugBuilder;
 import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
@@ -89,8 +89,8 @@ public final class Main {
         }
     
         display.addRenderer(new VisualizerRenderer(
-                new DefaultVisualizerBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(new URI(resources[1]))
-                                              .buildVisualizer(), tempTestPlayer));
+                new DebugBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(new URI(resources[1])).buildVisualizer(),
+                tempTestPlayer));
         display.start();
     
         // setup music player
