@@ -40,8 +40,8 @@ public class PluginManager {
     
     public void loadPlugins() {
         File pluginsFolder = new File(PLUGIN_FOLDER);
-        
-        if (pluginsFolder.exists()) //noinspection ResultOfMethodCallIgnored
+    
+        if (!pluginsFolder.exists()) //noinspection ResultOfMethodCallIgnored
             pluginsFolder.mkdir();
     
         if (pluginsFolder.listFiles() != null) {
