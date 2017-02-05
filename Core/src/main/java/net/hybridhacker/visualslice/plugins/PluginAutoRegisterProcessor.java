@@ -17,7 +17,7 @@ import java.io.Writer;
 import java.util.Set;
 
 /**
- *
+ * A processor for {@link AutoRegister} to auto-generate the file for the plugin
  */
 @AutoService(Processor.class)
 public class PluginAutoRegisterProcessor extends AbstractProcessor {
