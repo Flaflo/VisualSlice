@@ -1,6 +1,6 @@
 package net.hybridhacker.visualslice.renderer;
 
-import net.hybridhacker.visualslice.music.IMusicPlayer;
+import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 
 import java.util.NoSuchElementException;
@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 public class VisualizerRenderer implements Runnable {
     
     private final IVisualizer visualizer;
-    private final IMusicPlayer musicPlayer;
+    private final MusicPlayer musicPlayer;
     
     /**
      * Initializes the given visualizers and starts to render it
@@ -19,7 +19,7 @@ public class VisualizerRenderer implements Runnable {
      * @param visualizer  (decorated) visualizer to render
      * @param musicPlayer music player providing data to the visualizer
      */
-    public VisualizerRenderer(final IVisualizer visualizer, final IMusicPlayer musicPlayer) {
+    public VisualizerRenderer(final IVisualizer visualizer, final MusicPlayer musicPlayer) {
         this.visualizer = visualizer;
         this.musicPlayer = musicPlayer;
     }
