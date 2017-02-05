@@ -43,11 +43,13 @@ public class PluginManager {
         
         if (pluginsFolder.exists()) //noinspection ResultOfMethodCallIgnored
             pluginsFolder.mkdir();
-        
-        //noinspection ConstantConditions
-        for (File file : pluginsFolder.listFiles()) {
-            if (file.getName().endsWith(".jar")) {
-                loadPlugin(file);
+    
+        if (pluginsFolder.listFiles() != null) {
+            //noinspection ConstantConditions
+            for (File file : pluginsFolder.listFiles()) {
+                if (file.getName().endsWith(".jar")) {
+                    loadPlugin(file);
+                }
             }
         }
     }
