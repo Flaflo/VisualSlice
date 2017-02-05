@@ -24,7 +24,7 @@ public class DebugBuilder implements VisualizerBuilder {
     @Override
     public IVisualizer buildVisualizer() {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
-        
+        this.visualizer.initialize();
         return this.visualizer;
     }
     

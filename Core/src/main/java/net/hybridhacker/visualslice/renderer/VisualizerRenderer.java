@@ -22,8 +22,6 @@ public class VisualizerRenderer implements Runnable {
     public VisualizerRenderer(final IVisualizer visualizer, final IMusicPlayer musicPlayer) {
         this.visualizer = visualizer;
         this.musicPlayer = musicPlayer;
-        
-        this.visualizer.initialize();
     }
     
     @Override
