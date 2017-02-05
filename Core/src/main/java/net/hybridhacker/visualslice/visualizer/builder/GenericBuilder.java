@@ -60,7 +60,7 @@ public class GenericBuilder implements VisualizerBuilder {
      */
     public void addDecorator(final String decorator) {
         this.decorators.add(decorator);
-        this.decoratorPrototypes.put(decorator, DecoratorRegistry.getInstance().createNewDecorator(decorator, null));
+        this.decoratorPrototypes.putIfAbsent(decorator, DecoratorRegistry.getInstance().createNewDecorator(decorator, null));
     }
     
     /**
@@ -70,7 +70,6 @@ public class GenericBuilder implements VisualizerBuilder {
      */
     public void removeDecorator(final String decorator) {
         this.decorators.remove(decorator);
-        this.decoratorPrototypes.remove(decorator);
     }
     
     /**
