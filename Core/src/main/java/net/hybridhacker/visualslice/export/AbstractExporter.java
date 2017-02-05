@@ -6,6 +6,7 @@ import net.hybridhacker.visualslice.visualizer.IVisualizer;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.io.File;
 import java.net.URI;
 
 /**
@@ -35,8 +36,9 @@ public abstract class AbstractExporter {
      *
      * @param audioSource some source of audio that can be loaded into the music player
      * @param visualizer  the decorated visualizer that shall be rendered
+     * @param output      output file
      */
-    public abstract void export(final URI audioSource, final IVisualizer visualizer);
+    public abstract void export(URI audioSource, IVisualizer visualizer, File output);
     
     /**
      * @return the settings specific to the exporter implementation

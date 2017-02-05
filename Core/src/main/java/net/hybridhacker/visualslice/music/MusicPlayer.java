@@ -30,24 +30,21 @@ public class MusicPlayer implements AudioListener {
         this.minim = new Minim();
     }
     
-    public void play(final URI audioSource) {
-        if (this.audioPlayer != null && this.audioPlayer.isPlaying()) {
-            this.audioPlayer.close();
-        }
-        
-        final File audioFile = new File(audioSource);
-        if (!audioFile.exists()) {
-            throw new IllegalArgumentException("The given URI does not point to a file");
-        }
-        
-        this.audioPlayer = minim.loadFile(audioFile.getAbsolutePath());
+    /**
+     * Start player
+     */
+    public void play() {
         this.audioPlayer.play();
-        
-        this.fft = new FFT(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
-        this.beatDetect = new BeatDetect(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
-        this.beatDetect.setSensitivity(150);
-        
-        this.audioPlayer.addListener(this);
+    }
+    
+    /**
+     * Load track into player and start playing
+     *
+     * @param audioSource audio track location
+     */
+    public void play(final URI audioSource) {
+        loadTrack(audioSource);
+        play();
     }
     
     /**
@@ -62,6 +59,15 @@ public class MusicPlayer implements AudioListener {
      */
     public void pause() {
         throw new NotImplementedException();
+    }
+    
+    /**
+     * Skip an amount of milliseconds
+     *
+     * @param ms milliseconds to skip
+     */
+    public void skip(final int ms) {
+        this.audioPlayer.skip(ms);
     }
     
     /**
@@ -146,5 +152,29 @@ public class MusicPlayer implements AudioListener {
         if (this.getBeatDetect().isPresent() && this.getMixedAudioBuffer().isPresent()) {
             this.getBeatDetect().get().detect(this.getMixedAudioBuffer().get());
         }
+    }
+    
+    /**
+     * Load a track into the audio player. Old tracks will be stopped and disposed
+     *
+     * @param audioSource audio track location
+     */
+    public void loadTrack(final URI audioSource) {
+        if (this.audioPlayer != null && this.audioPlayer.isPlaying()) {
+            this.audioPlayer.close();
+        }
+        
+        final File audioFile = new File(audioSource);
+        if (!audioFile.exists()) {
+            throw new IllegalArgumentException("The given URI does not point to a file");
+        }
+        
+        this.audioPlayer = minim.loadFile(audioFile.getAbsolutePath());
+        
+        this.fft = new FFT(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
+        this.beatDetect = new BeatDetect(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
+        this.beatDetect.setSensitivity(150);
+        
+        this.audioPlayer.addListener(this);
     }
 }
