@@ -44,7 +44,7 @@ public final class Main {
         final CommandLineInterface commandLineInterface = new CommandLineInterface();
     
         // display settings from command line
-        final int[] displaySettings = {800, 250, 120};
+        final int[] displaySettings = {800, 250, 60};
         commandLineInterface.addOption("w", "set the GUI width", "width", false, width -> displaySettings[0] =
                 width.isPresent() ? Integer.parseInt(width.get()) : displaySettings[0]);
         commandLineInterface.addOption("h", "set the GUI height", "height", false, height -> displaySettings[1] =
@@ -82,7 +82,7 @@ public final class Main {
         }
     
         // setup display
-        final Display display = new Display("VisualSlice", displaySettings[0], displaySettings[1], displaySettings[0]);
+        final Display display = new Display("VisualSlice", displaySettings[0], displaySettings[1], displaySettings[2]);
         BufferedImage theImage = null;
         try {
             theImage = ImageIO.read(new URI(resources[1]).toURL());
