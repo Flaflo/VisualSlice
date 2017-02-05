@@ -1,4 +1,4 @@
-package net.hybridhacker.visualslice.particle;
+package net.hybridhacker.visualslice.particlesystem;
 
 import lombok.Data;
 
