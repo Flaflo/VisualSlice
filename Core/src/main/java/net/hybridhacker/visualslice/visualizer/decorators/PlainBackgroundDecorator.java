@@ -27,7 +27,8 @@ public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     protected void doInitialize() {}
     
     @Override
-    protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
+    protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer,
+                          final BeatDetect beatDetect, final FFT fft, final int trackLength, final int trackPosition) {
         G2D.clear(this.color);
     }
     

@@ -39,6 +39,7 @@ public class VisualizerRenderer implements Runnable {
         
         this.visualizer.onDraw(musicPlayer.getLength().get(), musicPlayer.getPosition().get(), musicPlayer.getLeftAudioBuffer().get(),
                                musicPlayer.getRightAudioBuffer().get(), musicPlayer.getMixedAudioBuffer().get(),
-                               musicPlayer.getBeatDetect().get(), musicPlayer.getFFT().get());
+                               musicPlayer.getBeatDetect().get(), musicPlayer.getFFT().get(), musicPlayer.getLength().get(),
+                               musicPlayer.getPosition().get());
     }
 }

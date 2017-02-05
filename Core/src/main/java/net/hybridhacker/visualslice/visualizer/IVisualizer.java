@@ -26,9 +26,12 @@ public interface IVisualizer {
      * @param mixAudioBuffer   the mixed audio buffer
      * @param beatDetect       a beat detector previously registered in the player
      * @param fft              a fast fourier transformation object for frequency analysis
+     * @param trackLength      length of the current track in ms
+     * @param trackPosition    current position in track in ms
      */
     void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer,
-                final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft);
+                final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft, final int trackLength,
+                final int trackPosition);
     
     /**
      * @return the name of the visualizer. This method must return the same string for any instance
