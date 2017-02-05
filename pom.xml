@@ -11,6 +11,7 @@
 
     <modules>
         <module>Core</module>
+        <module>TestPlugin</module>
     </modules>
 
     <build>
