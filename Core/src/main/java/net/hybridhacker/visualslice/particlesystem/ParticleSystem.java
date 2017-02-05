@@ -1,5 +1,7 @@
 package net.hybridhacker.visualslice.particlesystem;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -16,7 +18,9 @@ public class ParticleSystem {
     
     private int ticksPassed;
     
+    @Getter
     private final List<Particle> particles = new ArrayList<>();
+    
     private final List<Consumer<Integer>> systemHandlers = new LinkedList<>();
     
     @SafeVarargs
