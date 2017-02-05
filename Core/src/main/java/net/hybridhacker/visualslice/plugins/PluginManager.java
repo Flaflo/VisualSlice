@@ -14,7 +14,7 @@ import java.util.List;
  *
  */
 public class PluginManager {
-    private static final String PLUGIN_FOLDER = "/plugins/";
+    private static final String PLUGIN_FOLDER = "plugins/";
     
     private final static PluginManager instance;
     
