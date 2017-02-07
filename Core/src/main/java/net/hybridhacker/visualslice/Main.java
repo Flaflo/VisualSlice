@@ -54,7 +54,7 @@ public final class Main {
                                                frames.orElse("" + GuiController.getInstance().getDisplaySettings().getFps()))));
         
         // shortcut for help page printing
-        if (args[0].equalsIgnoreCase("--help")) {
+        if (args.length == 1 && args[0].equalsIgnoreCase("--help")) {
             commandLineInterface.printHelp();
             return;
         }
