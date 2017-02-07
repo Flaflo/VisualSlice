@@ -1,14 +1,13 @@
 package net.hybridhacker.visualslice.display;
 
-import lombok.Getter;
-import net.hybridhacker.visualslice.gui.VisualSliceGui;
-import net.hybridhacker.visualslice.utils.G2D;
-import org.apache.commons.lang3.ArrayUtils;
-
 import java.awt.*;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import lombok.Getter;
+import net.hybridhacker.visualslice.gui.VisualSliceGui;
+import net.hybridhacker.visualslice.utils.G2D;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Display for VisualSlice
@@ -27,6 +26,7 @@ public final class Display extends Thread {
     
     private final long fpsMillis;
     
+    @Getter
     private Runnable[] renderers;
     
     /**
