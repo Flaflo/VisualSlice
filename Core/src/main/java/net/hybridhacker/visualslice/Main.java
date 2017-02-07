@@ -53,14 +53,6 @@ public final class Main {
                                        frames -> GuiController.getInstance().getDisplaySettings().setFps(Integer.valueOf(
                                                frames.orElse("" + GuiController.getInstance().getDisplaySettings().getFps()))));
         
-        // resources from command line
-        final String[] resources = new String[] {"", ""};
-        commandLineInterface.addOption("f", "the music file to play", "file", true,
-                                       file -> resources[0] = file.isPresent() ? file.get() : resources[0]);
-    
-        commandLineInterface
-                .addOption("img", "background image URI", "image", true, uri -> resources[1] = uri.isPresent() ? uri.get() : resources[1]);
-        
         // shortcut for help page printing
         if (args[0].equalsIgnoreCase("--help")) {
             commandLineInterface.printHelp();
