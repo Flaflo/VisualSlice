@@ -1,4 +1,4 @@
-package net.hybridhacker.visualslice.gui.settings;
+package net.hybridhacker.visualslice.gui.screens.settings;
 
 import java.awt.Color;
 import javax.swing.JButton;
