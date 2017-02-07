@@ -1,16 +1,10 @@
 package net.hybridhacker.visualslice;
 
 import net.hybridhacker.visualslice.gui.GuiController;
-import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.plugins.PluginManager;
+import net.hybridhacker.visualslice.plugins.loader.InternalPluginLoader;
+import net.hybridhacker.visualslice.plugins.loader.PluginFolderLoader;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
-import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
-import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
-import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
-import net.hybridhacker.visualslice.visualizer.decorators.BeatParticleDecorator;
-import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
-import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
-import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
 import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.ParseException;
@@ -22,7 +16,7 @@ import java.net.URISyntaxException;
  */
 public final class Main {
     
-    private static final MusicPlayer tempTestPlayer = new MusicPlayer();
+    private static final String PLUGIN_FOLDER = "plugins/";
     
     /**
      * Main method
@@ -30,8 +24,8 @@ public final class Main {
      * @param args terminal arguments
      */
     public static void main(final String... args) throws URISyntaxException, ParseException {
-        // register the application's visualizers
-        registerDefaultVisualizers();
+        PluginManager.getInstance().attachLoader(new InternalPluginLoader());
+        PluginManager.getInstance().attachLoader(new PluginFolderLoader(PLUGIN_FOLDER));
         PluginManager.getInstance().loadPlugins();
         
         final CommandLineInterface commandLineInterface = new CommandLineInterface();
@@ -75,17 +69,5 @@ public final class Main {
         }
     
         GuiController.getInstance().getDisplay().start();
-    }
-    
-    /**
-     * Register all visualizers provided by default
-     */
-    public static void registerDefaultVisualizers() {
-        VisualizerRegistry.getInstance().registerVisualizer(new DebugVisualizer());
-        VisualizerRegistry.getInstance().registerVisualizer(new BasicFrequencyLine());
-    
-        DecoratorRegistry.getInstance().registerDecorator(new ImageBackgroundDecorator(null));
-        DecoratorRegistry.getInstance().registerDecorator(new PlainBackgroundDecorator(null));
-        DecoratorRegistry.getInstance().registerDecorator(new BeatParticleDecorator(null));
     }
 }
