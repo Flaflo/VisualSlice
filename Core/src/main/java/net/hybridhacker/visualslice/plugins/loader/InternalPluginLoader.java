@@ -12,6 +12,8 @@ public class InternalPluginLoader implements PluginLoader {
     
     @Override
     public List<Object> loadPlugins() {
-        return Collections.singletonList(new InternalPlugin());
+        final InternalPlugin plugin = new InternalPlugin();
+        plugin.onEnable();
+        return Collections.singletonList(plugin);
     }
 }
