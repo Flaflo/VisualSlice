@@ -1,15 +1,12 @@
 package net.hybridhacker.visualslice;
 
-import net.hybridhacker.visualslice.display.Display;
+import net.hybridhacker.visualslice.gui.GuiController;
 import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.plugins.PluginManager;
-import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
-import net.hybridhacker.visualslice.utils.ColorUtil;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
 import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
-import net.hybridhacker.visualslice.visualizer.builder.DebugBuilder;
 import net.hybridhacker.visualslice.visualizer.decorators.BeatParticleDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
@@ -18,11 +15,6 @@ import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.ParseException;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
@@ -45,14 +37,22 @@ public final class Main {
         final CommandLineInterface commandLineInterface = new CommandLineInterface();
     
         // display settings from command line
-        final int[] displaySettings = {800, 250, 60};
-        commandLineInterface.addOption("w", "set the GUI width", "width", false, width -> displaySettings[0] =
-                width.isPresent() ? Integer.parseInt(width.get()) : displaySettings[0]);
-        commandLineInterface.addOption("h", "set the GUI height", "height", false, height -> displaySettings[1] =
-                height.isPresent() ? Integer.parseInt(height.get()) : displaySettings[1]);
-        commandLineInterface.addOption("fps", "the frames per second", "fps", false, frames -> displaySettings[2] =
-                frames.isPresent() ? Integer.parseInt(frames.get()) : displaySettings[2]);
     
+        // the formatter is sadly too bad for this
+        // @formatter:off
+        commandLineInterface.addOption("w", "set the GUI width", "width", false,
+                                       width -> GuiController.getInstance().getDisplaySettings().setWidth(Integer.valueOf(
+                                               width.orElse("" + GuiController.getInstance().getDisplaySettings().getWidth()))));
+        // @formatter:on
+    
+        commandLineInterface.addOption("h", "set the GUI height", "height", false,
+                                       height -> GuiController.getInstance().getDisplaySettings().setHeight(Integer.valueOf(
+                                               height.orElse("" + GuiController.getInstance().getDisplaySettings().getHeight()))));
+    
+        commandLineInterface.addOption("fps", "the frames per second", "fps", false,
+                                       frames -> GuiController.getInstance().getDisplaySettings().setFps(Integer.valueOf(
+                                               frames.orElse("" + GuiController.getInstance().getDisplaySettings().getFps()))));
+        
         // resources from command line
         final String[] resources = new String[] {"", ""};
         commandLineInterface.addOption("f", "the music file to play", "file", true,
@@ -82,22 +82,7 @@ public final class Main {
             return;
         }
     
-        // setup display
-        final Display display = new Display("VisualSlice", displaySettings[0], displaySettings[1], displaySettings[2]);
-        BufferedImage theImage = null;
-        try {
-            theImage = ImageIO.read(new URI(resources[1]).toURL());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    
-        display.addRenderer(new VisualizerRenderer(
-                new DebugBuilder().debugVisualizer(ColorUtil.getAverageColor(theImage)).image(new URI(resources[1])).buildVisualizer(),
-                tempTestPlayer));
-        display.start();
-    
-        // setup music player
-        tempTestPlayer.play(new File(resources[0]).toURI());
+        GuiController.getInstance().getDisplay().start();
     }
     
     /**
