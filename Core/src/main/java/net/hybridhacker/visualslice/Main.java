@@ -1,6 +1,6 @@
 package net.hybridhacker.visualslice;
 
-import net.hybridhacker.visualslice.gui.GuiController;
+import net.hybridhacker.visualslice.gui.Controller;
 import net.hybridhacker.visualslice.music.MusicPlayer;
 import net.hybridhacker.visualslice.plugins.PluginManager;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
@@ -41,17 +41,14 @@ public final class Main {
         // the formatter is sadly too bad for this
         // @formatter:off
         commandLineInterface.addOption("w", "set the GUI width", "width", false,
-                                       width -> GuiController.getInstance().getDisplaySettings().setWidth(Integer.valueOf(
-                                               width.orElse("" + GuiController.getInstance().getDisplaySettings().getWidth()))));
+                                       width -> Controller.getInstance().getDisplaySettings().setWidth(Integer.valueOf(width.orElse("" + Controller.getInstance().getDisplaySettings().getWidth()))));
         // @formatter:on
     
         commandLineInterface.addOption("h", "set the GUI height", "height", false,
-                                       height -> GuiController.getInstance().getDisplaySettings().setHeight(Integer.valueOf(
-                                               height.orElse("" + GuiController.getInstance().getDisplaySettings().getHeight()))));
+                                       height -> Controller.getInstance().getDisplaySettings().setHeight(Integer.valueOf(height.orElse("" + Controller.getInstance().getDisplaySettings().getHeight()))));
     
         commandLineInterface.addOption("fps", "the frames per second", "fps", false,
-                                       frames -> GuiController.getInstance().getDisplaySettings().setFps(Integer.valueOf(
-                                               frames.orElse("" + GuiController.getInstance().getDisplaySettings().getFps()))));
+                                       frames -> Controller.getInstance().getDisplaySettings().setFps(Integer.valueOf(frames.orElse("" + Controller.getInstance().getDisplaySettings().getFps()))));
         
         // shortcut for help page printing
         if (args.length == 1 && args[0].equalsIgnoreCase("--help")) {
@@ -74,7 +71,7 @@ public final class Main {
             return;
         }
     
-        GuiController.getInstance().getDisplay().start();
+        Controller.getInstance().getDisplay().start();
     }
     
     /**

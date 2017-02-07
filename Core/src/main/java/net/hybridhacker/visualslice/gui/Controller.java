@@ -9,9 +9,9 @@ import net.hybridhacker.visualslice.visualizer.builder.GenericBuilder;
 /**
  * @author Flaflo
  */
-public final class GuiController {
+public final class Controller {
     
-    private static final GuiController instance = new GuiController();
+    private static final Controller instance = new Controller();
     
     @Getter
     private final GenericBuilder builder = new GenericBuilder();
@@ -24,14 +24,14 @@ public final class GuiController {
     
     private Display display = null;
     
-    public static GuiController getInstance() {
+    public static Controller getInstance() {
         return instance;
     }
     
     /**
      * This class is a singleton and thus handles its creation on its own
      */
-    private GuiController() {}
+    private Controller() {}
     
     /**
      * Returns the display instance controlled by this controller. As the method is invoked first, the display instance is created and
