@@ -76,7 +76,7 @@ public class DecoratorRegistry {
         final Setting<?>[] prototypeSettings = decoratorPrototypeSettings.get(decorator);
     
         for (int i = 0; i < settings.length; i++) {
-            settings[i].setValue(prototypeSettings[i]);
+            settings[i].setValue(prototypeSettings[i].getValue());
         }
     
         return decoratorInst;
