@@ -28,7 +28,7 @@ public class VisualizerRenderer implements Runnable {
     public void run() {
         if (!musicPlayer.getMixedAudioBuffer().isPresent() || !musicPlayer.getLeftAudioBuffer().isPresent() ||
             !musicPlayer.getRightAudioBuffer().isPresent() || !musicPlayer.getLength().isPresent() ||
-            !musicPlayer.getPosition().isPresent() && !musicPlayer.getBeatDetect().isPresent() && !musicPlayer.getFFT().isPresent()) {
+            !musicPlayer.getPosition().isPresent() || !musicPlayer.getBeatDetect().isPresent() || !musicPlayer.getFFT().isPresent()) {
             return;
         }
         
