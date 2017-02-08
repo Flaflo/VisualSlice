@@ -16,8 +16,14 @@ import java.net.URISyntaxException;
  */
 public final class Main {
     
+    /**
+     * The default folder to load plugins from
+     */
     private static final String PLUGIN_FOLDER = "plugins/";
     
+    /**
+     * the command line interface
+     */
     private static final CommandLineInterface commandLineInterface;
     
     static {
