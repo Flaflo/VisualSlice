@@ -22,6 +22,7 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
     
     @Setter
     private URI imageUri;
+    private final Setting<?>[] settings;
     
     private BufferedImage image;
     
@@ -33,9 +34,9 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
         } catch (URISyntaxException e) {
             assert false;
         }
-    }
     
-    private final Setting<?>[] settings = new Setting<?>[] {new Setting<>("Image URI", this.imageUri, this::setImageUri)};
+        settings = new Setting<?>[] {new Setting<>("Image URI", this.imageUri, this::setImageUri)};
+    }
     
     @Override
     protected void doInitialize() {
