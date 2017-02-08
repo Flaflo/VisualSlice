@@ -1,13 +1,12 @@
 package net.hybridhacker.visualslice.visualizer.frequency;
 
-import ddf.minim.AudioBuffer;
-import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
-import java.awt.*;
 import lombok.Setter;
 import net.hybridhacker.visualslice.gui.Controller;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
+
+import java.awt.*;
 
 /**
  * A basic frequency analysis visualizer
@@ -42,8 +41,8 @@ public class BasicFrequencyLine implements IVisualizer {
     public void initialize() {}
     
     @Override
-    public void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer,
-                       final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
+    public void onDraw(final int playerLength, final int playerPosition, final float[] leftAudioBuffer,
+                       final float[] rightAudioBuffer, final float[] mixAudioBuffer, final FFT fft) {
         
         for (int i = 0; i < Controller.getInstance().getDisplay().getWidth() / (barWidth + gap); i++) {
             final int band = (int) Math.max(fft.getBand(i * barWidth) * scale, barMinHeight);

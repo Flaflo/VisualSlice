@@ -28,7 +28,7 @@ public class VisualizerRenderer implements Runnable {
     public void run() {
         if (!musicPlayer.getMixedAudioBuffer().isPresent() || !musicPlayer.getLeftAudioBuffer().isPresent() ||
             !musicPlayer.getRightAudioBuffer().isPresent() || !musicPlayer.getLength().isPresent() ||
-            !musicPlayer.getPosition().isPresent() || !musicPlayer.getBeatDetect().isPresent() || !musicPlayer.getFFT().isPresent()) {
+            !musicPlayer.getPosition().isPresent() || !musicPlayer.getFFT().isPresent()) {
             return;
         }
         
@@ -36,9 +36,10 @@ public class VisualizerRenderer implements Runnable {
         try {
             this.musicPlayer.getFFT().get().forward(this.musicPlayer.getMixedAudioBuffer().get());
         } catch (NoSuchElementException ignored) {}
-        
-        this.visualizer.onDraw(musicPlayer.getLength().get(), musicPlayer.getPosition().get(), musicPlayer.getLeftAudioBuffer().get(),
-                               musicPlayer.getRightAudioBuffer().get(), musicPlayer.getMixedAudioBuffer().get(),
-                               musicPlayer.getBeatDetect().get(), musicPlayer.getFFT().get());
+    
+        this.visualizer
+                .onDraw(musicPlayer.getLength().get(), musicPlayer.getPosition().get(), musicPlayer.getLeftAudioBuffer().get().toArray(),
+                        musicPlayer.getRightAudioBuffer().get().toArray(), musicPlayer.getMixedAudioBuffer().get().toArray(),
+                        musicPlayer.getFFT().get());
     }
 }

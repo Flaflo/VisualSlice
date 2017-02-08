@@ -1,14 +1,18 @@
 package net.hybridhacker.visualslice;
 
+import net.hybridhacker.visualslice.export.HumbleExporter;
 import net.hybridhacker.visualslice.gui.Controller;
 import net.hybridhacker.visualslice.plugins.PluginManager;
 import net.hybridhacker.visualslice.plugins.loader.InternalPluginLoader;
 import net.hybridhacker.visualslice.plugins.loader.PluginFolderLoader;
 import net.hybridhacker.visualslice.utils.CommandLineInterface;
+import net.hybridhacker.visualslice.visualizer.builder.DebugBuilder;
 import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.ParseException;
 
+import java.awt.*;
+import java.io.File;
 import java.net.URISyntaxException;
 
 /**
@@ -52,6 +56,12 @@ public final class Main {
         // shortcut for help page printing
         if (args.length == 1 && args[0].equalsIgnoreCase("--help")) {
             commandLineInterface.printHelp();
+            return;
+        } else if (args.length == 0) {
+            HumbleExporter exporter = new HumbleExporter();
+            exporter.export(new File("K:\\Clubbanger.MP3").toURI(),
+                            new DebugBuilder().debugVisualizer(Color.BLUE).background(Color.WHITE)
+                                              .buildVisualizer(), new File("D:\\output.mp4"));
             return;
         }
         

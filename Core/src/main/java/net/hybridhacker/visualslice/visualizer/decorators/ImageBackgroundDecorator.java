@@ -1,7 +1,5 @@
 package net.hybridhacker.visualslice.visualizer.decorators;
 
-import ddf.minim.AudioBuffer;
-import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
 import lombok.Setter;
 import net.hybridhacker.visualslice.gui.Controller;
@@ -48,8 +46,8 @@ public class ImageBackgroundDecorator extends AbstractVisualizerDecorator {
     }
     
     @Override
-    protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer,
-                          final BeatDetect beatDetect, final FFT fft, final int trackLength, final int trackPosition) {
+    protected void doDraw(final float[] leftAudioBuffer, final float[] rightAudioBuffer, final float[] mixAudioBuffer, final FFT fft,
+                          final int trackLength, final int trackPosition) {
         if (this.image != null) {
             Controller.getInstance().getRenderEngine().drawImage(this.image, 0, 0, Controller.getInstance().getDisplay().getWidth(),
                                                                  Controller.getInstance().getDisplay().getHeight());

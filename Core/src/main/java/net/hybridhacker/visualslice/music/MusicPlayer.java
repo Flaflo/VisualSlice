@@ -1,10 +1,8 @@
 package net.hybridhacker.visualslice.music;
 
 import ddf.minim.AudioBuffer;
-import ddf.minim.AudioListener;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
-import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -15,13 +13,12 @@ import java.util.Optional;
 /**
  * A simple file music player
  */
-public class MusicPlayer implements AudioListener {
+public class MusicPlayer {
     
     private final Minim minim;
     private AudioPlayer audioPlayer;
     
     private FFT fft;
-    private BeatDetect beatDetect;
     
     /**
      * Initialize a new audio player
@@ -122,36 +119,10 @@ public class MusicPlayer implements AudioListener {
     }
     
     /**
-     * @return the beat detect object for the current track
-     */
-    public Optional<BeatDetect> getBeatDetect() {
-        return Optional.ofNullable(this.beatDetect);
-    }
-    
-    /**
      * @return the FFT instance for the current track
      */
     public Optional<FFT> getFFT() {
         return Optional.ofNullable(this.fft);
-    }
-    
-    @Override
-    public void samples(float[] mono) {
-        this.analyzeBeat();
-    }
-    
-    @Override
-    public void samples(float[] left, float[] right) {
-        this.analyzeBeat();
-    }
-    
-    /**
-     * Analies the beat with the beat detect class
-     */
-    private void analyzeBeat() {
-        if (this.getBeatDetect().isPresent() && this.getMixedAudioBuffer().isPresent()) {
-            this.getBeatDetect().get().detect(this.getMixedAudioBuffer().get());
-        }
     }
     
     /**
@@ -172,9 +143,5 @@ public class MusicPlayer implements AudioListener {
         this.audioPlayer = minim.loadFile(audioFile.getAbsolutePath());
         
         this.fft = new FFT(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
-        this.beatDetect = new BeatDetect(this.audioPlayer.bufferSize(), this.audioPlayer.sampleRate());
-        this.beatDetect.setSensitivity(150);
-        
-        this.audioPlayer.addListener(this);
     }
 }

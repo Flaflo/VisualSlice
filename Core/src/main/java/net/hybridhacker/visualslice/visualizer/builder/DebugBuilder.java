@@ -1,13 +1,13 @@
 package net.hybridhacker.visualslice.visualizer.builder;
 
-import java.awt.*;
-import java.net.URI;
 import net.hybridhacker.visualslice.visualizer.DebugVisualizer;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
-import net.hybridhacker.visualslice.visualizer.decorators.BeatParticleDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.ImageBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.decorators.PlainBackgroundDecorator;
 import net.hybridhacker.visualslice.visualizer.frequency.BasicFrequencyLine;
+
+import java.awt.*;
+import java.net.URI;
 
 /**
  *
@@ -54,13 +54,6 @@ public class DebugBuilder implements VisualizerBuilder {
         if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
     
         this.visualizer = new PlainBackgroundDecorator(this.visualizer);
-        return this;
-    }
-    
-    public DebugBuilder particles() {
-        if (this.visualizer == null) throw new IllegalStateException("No visualizer was chosen yet");
-        
-        this.visualizer = new BeatParticleDecorator(this.visualizer);
         return this;
     }
     

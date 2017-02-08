@@ -1,7 +1,6 @@
 package net.hybridhacker.visualslice.visualizer;
 
 import ddf.minim.AudioBuffer;
-import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
 
@@ -24,11 +23,10 @@ public interface IVisualizer {
      * @param leftAudioBuffer  the left stereo audio buffer
      * @param rightAudioBuffer the right stereo audio buffer
      * @param mixAudioBuffer   the mixed audio buffer
-     * @param beatDetect       a beat detector previously registered in the player
      * @param fft              a fast fourier transformation object for frequency analysis
      */
-    void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer,
-                final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft);
+    void onDraw(final int playerLength, final int playerPosition, final float[] leftAudioBuffer, final float[] rightAudioBuffer,
+                final float[] mixAudioBuffer, final FFT fft);
     
     /**
      * @return the name of the visualizer. This method must return the same string for any instance
