@@ -1,6 +1,7 @@
 package net.hybridhacker.visualslice.renderer;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -257,5 +258,5 @@ public interface IRenderEngine {
     /**
      * @return the image everything from the prior render pass was drawn onto
      */
-    public default Image getRenderedImage() { return null; }
+    public BufferedImage getRenderedImage();
 }
