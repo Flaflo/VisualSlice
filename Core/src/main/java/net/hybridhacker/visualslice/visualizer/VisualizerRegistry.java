@@ -16,6 +16,9 @@ public class VisualizerRegistry {
         instance = new VisualizerRegistry();
     }
     
+    /**
+     * This class is a singleton and thus handles its instantiating itself
+     */
     private VisualizerRegistry() {
         
     }

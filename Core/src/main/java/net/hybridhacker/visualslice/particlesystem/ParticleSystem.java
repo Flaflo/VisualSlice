@@ -23,6 +23,11 @@ public class ParticleSystem {
     
     private final List<BiConsumer<ParticleSystem, Integer>> systemHandlers = new LinkedList<>();
     
+    /**
+     * Initialize a particle system with an array of handlers that will be called at every tick and consume the system and current tick
+     *
+     * @param handlers a variadic array of {@link BiConsumer} that will be used as a tick handler
+     */
     @SafeVarargs
     public ParticleSystem(final BiConsumer<ParticleSystem, Integer>... handlers) {
         this.systemHandlers.addAll(Arrays.asList(handlers));

@@ -32,6 +32,16 @@ public class PluginAutoRegisterProcessor extends AbstractProcessor {
         return SourceVersion.RELEASE_8;
     }
     
+    /**
+     * Loops to all found {@link AutoRegister} annotations and creates a resource file named {@value AutoRegister#PLUGIN_META_FILE}. So
+     * there cannot be more than one register annotation per plugin archive since this would result in the resource file overwriting
+     * itself.
+     *
+     * @param annotations A set of found annotations processed by this processor
+     * @param roundEnv    the processors round environment containing the context of current processing round
+     *
+     * @return definitely true, since all annotations are handled within the first call of this processor
+     */
     @Override
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
         for (final Element element : roundEnv.getElementsAnnotatedWith(AutoRegister.class)) {

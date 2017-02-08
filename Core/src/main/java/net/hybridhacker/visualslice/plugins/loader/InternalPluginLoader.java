@@ -11,6 +11,9 @@ import java.util.List;
  */
 public class InternalPluginLoader implements PluginLoader {
     
+    /**
+     * @return a {@link Collections.SingletonList} of only the internal plugin
+     */
     @Override
     public List<SlicePlugin> loadPlugins() {
         return Collections.singletonList(new InternalPlugin());

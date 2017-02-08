@@ -3,10 +3,14 @@ package net.hybridhacker.visualslice.plugins;
 import net.hybridhacker.visualslice.plugins.loader.PluginLoader;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 /**
- *
+ * A manager for all loaded plugins. Different {@link PluginLoader}s can be attached to the manager which will be called upon plugin
+ * loading. Note, that a plugin cannot attach more plugin loaders, since the plugin is enabled after all plugins are already loaded.
+ * Though it is possible to attach another loader by using a static constructor in the plugin class, this will result in a
+ * {@link ConcurrentModificationException} and crash the plugin loading progress.
  */
 public class PluginManager {
     private final static PluginManager instance;
