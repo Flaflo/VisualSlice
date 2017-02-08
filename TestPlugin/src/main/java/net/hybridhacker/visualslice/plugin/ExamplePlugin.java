@@ -14,6 +14,11 @@ public class ExamplePlugin implements SlicePlugin {
     }
     
     @Override
+    public String getName() {
+        return "Example Plugin";
+    }
+    
+    @Override
     public String getAuthor() {
         return "Cydhra";
     }

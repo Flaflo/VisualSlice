@@ -1,6 +1,7 @@
 package net.hybridhacker.visualslice.plugins.loader;
 
 import net.hybridhacker.visualslice.content.InternalPlugin;
+import net.hybridhacker.visualslice.plugins.SlicePlugin;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,9 +12,7 @@ import java.util.List;
 public class InternalPluginLoader implements PluginLoader {
     
     @Override
-    public List<Object> loadPlugins() {
-        final InternalPlugin plugin = new InternalPlugin();
-        plugin.onEnable();
-        return Collections.singletonList(plugin);
+    public List<SlicePlugin> loadPlugins() {
+        return Collections.singletonList(new InternalPlugin());
     }
 }

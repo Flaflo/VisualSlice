@@ -12,7 +12,7 @@ public class PluginManager {
     private final static PluginManager instance;
     
     private final List<PluginLoader> pluginLoaders = new ArrayList<>();
-    private final List<Object> plugins = new ArrayList<>();
+    private final List<SlicePlugin> plugins = new ArrayList<>();
     
     static {
         instance = new PluginManager();
@@ -37,6 +37,10 @@ public class PluginManager {
      */
     public void loadPlugins() {
         this.pluginLoaders.forEach(loader -> this.plugins.addAll(loader.loadPlugins()));
+        this.plugins.forEach(plugin -> {
+            System.out.println("Enabling " + plugin.getName() + " by " + plugin.getAuthor() + " (" + plugin.getVersion() + ")");
+            plugin.onEnable();
+        });
     }
     
     /**

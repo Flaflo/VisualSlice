@@ -24,6 +24,11 @@ public class InternalPlugin implements SlicePlugin {
     }
     
     @Override
+    public String getName() {
+        return "internal content plugin";
+    }
+    
+    @Override
     public String getAuthor() {
         return "internal";
     }
