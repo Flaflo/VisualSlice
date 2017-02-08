@@ -5,7 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
- * An adapter for Minim which provides some required API methods for it, because Minim was designed for the processing framework
+ * An adapter for Minim which provides some required API methods for it, because Minim was designed for the <a
+ * href="https://processing.org/">Processing</a> framework
  *
  * @author Cydhra
  */

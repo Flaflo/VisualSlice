@@ -41,6 +41,9 @@ public class Setting<T extends Serializable> {
         if (settingUpdater != null) settingUpdater.accept((T) value);
     }
     
+    /**
+     * @return the serializable value of this setting
+     */
     public T getValue() {
         return this.value;
     }

@@ -23,6 +23,13 @@ public abstract class Particle {
     @Setter
     private boolean dead = false;
     
+    /**
+     * Initialize a particle with position, speed, direction and the maximum time to live
+     *
+     * @param position particle's initial position vector
+     * @param velocity particle's initial velocity vector
+     * @param lifetime particle's maximum life time. If this is negative, the particle will last forever
+     */
     public Particle(final Vector2D position, final Vector2D velocity, final int lifetime) {
         this(position, velocity);
         this.lifetime = lifetime;
