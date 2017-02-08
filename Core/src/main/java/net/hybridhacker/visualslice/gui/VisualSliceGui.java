@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import net.hybridhacker.visualslice.gui.items.DecoratorListCellRenderer;
 import net.hybridhacker.visualslice.gui.items.DecoratorListItem;
@@ -22,6 +23,17 @@ public class VisualSliceGui extends javax.swing.JPanel {
      * Creates new form VisualSliceGui
      */
     public VisualSliceGui() {
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         initComponents();
 
         this.decoratorList.setModel(new AbstractListModel<DecoratorListItem>() {
@@ -49,26 +61,31 @@ public class VisualSliceGui extends javax.swing.JPanel {
         this.decoratorList.setCellRenderer(new DecoratorListCellRenderer());
 
         this.decoratorList.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent event) {
-                if (event.getButton() == MouseEvent.BUTTON1) {
-                    final JList<DecoratorListItem> list = (JList<DecoratorListItem>) event.getSource();
-                    final int index = list.locationToIndex(event.getPoint());
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    final JList<DecoratorListItem> list = (JList<DecoratorListItem>) e.getSource();
+                    final int index = list.locationToIndex(e.getPoint());
 
                     final DecoratorListItem item = (DecoratorListItem) list.getModel().getElementAt(index);
                     final String decorator = DecoratorRegistry.getInstance().getRegisteredDecorators()[index];
 
-                    if (DecoratorRegistry.getInstance().getSettingsOfDecorator(decorator).length > 0) {
-                        final DecoratorSettingsFrame settings = new DecoratorSettingsFrame(Controller.getInstance().getDisplay().getWindow(), decorator);
-                        settings.pack();
-                        settings.setVisible(true);
-                    }
-                    item.setSelected(!item.isSelected());
-                    if (item.isSelected()) {
-                        Controller.getInstance().getBuilder().addDecorator(decorator);
+                    if (e.getX() >= decoratorList.getWidth() / 4 && e.getX() >= decoratorList.getWidth() / 2) {
+                        if (DecoratorRegistry.getInstance().getSettingsOfDecorator(decorator).length > 0) {
+                            final DecoratorSettingsFrame settings = new DecoratorSettingsFrame(Controller.getInstance().getDisplay().getWindow(), decorator);
+                            settings.pack();
+                            settings.setVisible(true);
+                        }
                     } else {
-                        Controller.getInstance().getBuilder().removeDecorator(decorator);
+                        item.setSelected(!item.isSelected());
+                        if (item.isSelected()) {
+                            Controller.getInstance().getBuilder().addDecorator(decorator);
+                        } else {
+                            Controller.getInstance().getBuilder().removeDecorator(decorator);
+                        }
+                        list.repaint(list.getCellBounds(index, index));
                     }
-                    list.repaint(list.getCellBounds(index, index));
                 }
             }
         });

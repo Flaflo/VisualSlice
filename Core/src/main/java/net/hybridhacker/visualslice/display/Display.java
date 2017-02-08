@@ -21,6 +21,9 @@ public final class Display extends Thread {
     private static final long STANDARD_FPS = 60;
 
     @Getter
+    private Canvas canvas;
+
+    @Getter
     private final JFrame window;
 
     @Getter
@@ -60,9 +63,11 @@ public final class Display extends Thread {
         this.window.setResizable(false);
 
         this.window.setLayout(new BorderLayout());
-        this.window.add(Controller.getInstance().getRenderEngine().getCanvas());
+        this.window.add(this.canvas = new Canvas());
+        this.canvas.setPreferredSize(new Dimension(width, height));
         this.window.add(new VisualSliceGui(), BorderLayout.WEST);
-        
+        this.window.pack();
+
         this.fpsMillis = 1000 / fps;
 
         this.renderers = new Runnable[0];
@@ -71,9 +76,8 @@ public final class Display extends Thread {
     @Override
     public void run() {
         this.window.setVisible(true);
-
+        
         Controller.getInstance().getRenderEngine().init(width, height, BUFFERS);
-        this.window.pack();
 
         while (this.window.isShowing()) {
             long start = System.nanoTime() / 1_000_000;
@@ -81,6 +85,7 @@ public final class Display extends Thread {
             Controller.getInstance().getRenderEngine().clear();
             Arrays.stream(this.renderers).forEach(Runnable::run);
             Controller.getInstance().getRenderEngine().endRenderPass();
+            this.canvas.getGraphics().drawImage(Controller.getInstance().getRenderEngine().getRenderedImage(), 0, 0, null);
 
             long stop = System.nanoTime() / 1_000_000;
             try {

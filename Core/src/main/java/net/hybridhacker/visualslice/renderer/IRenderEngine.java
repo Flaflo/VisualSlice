@@ -255,12 +255,6 @@ public interface IRenderEngine {
     public boolean isAntialiasing();
     
     /**
-     * @return the canvas this engine is drawing onto
-     */
-    @Deprecated
-    public Canvas getCanvas();
-    
-    /**
      * @return the image everything from the prior render pass was drawn onto
      */
     public default Image getRenderedImage() { return null; }

@@ -26,7 +26,7 @@ public class DecoratorListCellRenderer extends JPanel implements ListCellRendere
     @Override
     public Component getListCellRendererComponent(JList<? extends DecoratorListItem> list, DecoratorListItem value, int index, boolean isSelected, boolean cellHasFocus) {
         this.setForeground(list.getForeground());
-        this.setBackground(list.getBackground().darker());
+        this.setBackground(list.getBackground().brighter());
         
         checkBox.setEnabled(list.isEnabled());
         checkBox.setSelected(value.isSelected());
@@ -39,7 +39,7 @@ public class DecoratorListCellRenderer extends JPanel implements ListCellRendere
         button.setFont(list.getFont());
         button.setBackground(list.getBackground());
         button.setForeground(list.getForeground());
-
+        
         return this;
     }
 }

@@ -1,12 +1,11 @@
 package net.hybridhacker.visualslice.renderer;
 
-import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 
 /**
  * Graphics2D render engine implementation
@@ -20,7 +19,8 @@ public class Graphics2DRenderEngine implements IRenderEngine {
      */
     private static final Color STANDARD_CLEAR_COLOR = Color.BLACK;
 
-    private Canvas canvas = new Canvas();
+    private BufferedImage[] buffers;
+    private int bufferIndex;
 
     private boolean antialiasing;
 
@@ -36,33 +36,23 @@ public class Graphics2DRenderEngine implements IRenderEngine {
 
     @Override
     public void init(int width, int height, int bufferCount) {
-        this.canvas.setPreferredSize(new Dimension(width, height));
+        this.buffers = new BufferedImage[bufferCount];
 
-        this.canvas.createBufferStrategy(bufferCount);
+        for (int i = 0; i < bufferCount; i++) {
+            this.buffers[i] = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        }
+
+        this.bufferIndex = 0;
     }
 
     @Override
     public void initRenderPass() {
-        this.graphics = (Graphics2D) this.canvas.getBufferStrategy().getDrawGraphics();
-
-        if (antialiasing) {
-            this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            this.graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            this.graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-            this.graphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        } else {
-            this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-            this.graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_DEFAULT);
-            this.graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            this.graphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_DEFAULT);
-        }
+        this.bufferIndex = ++this.bufferIndex % this.buffers.length;
+        this.graphics = (Graphics2D) this.buffers[this.bufferIndex].getGraphics();
     }
 
     @Override
-    public void endRenderPass() {
-        this.graphics.dispose();
-        this.canvas.getBufferStrategy().show();
-    }
+    public void endRenderPass() {    }
 
     @Override
     public void scale(int scaleX, int scaleY) {
@@ -143,7 +133,7 @@ public class Graphics2DRenderEngine implements IRenderEngine {
 
     @Override
     public void clear() {
-        this.clearRect(0, 0, this.getCanvas().getWidth(), this.getCanvas().getHeight());
+        this.clearRect(0, 0, this.buffers[this.bufferIndex].getWidth(), this.buffers[this.bufferIndex].getHeight());
     }
 
     @Override
@@ -191,6 +181,26 @@ public class Graphics2DRenderEngine implements IRenderEngine {
     @Override
     public void setAntialiasing(boolean antialiasing) {
         this.antialiasing = antialiasing;
+
+        if (antialiasing) {
+            for (final BufferedImage image : this.buffers) {
+                final Graphics2D graphics = (Graphics2D) image.getGraphics();
+
+                graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                graphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+            }
+        } else {
+            for (final BufferedImage image : this.buffers) {
+                final Graphics2D graphics = (Graphics2D) image.getGraphics();
+
+                graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+                graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_DEFAULT);
+                graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                graphics.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_DEFAULT);
+            }
+        }
     }
 
     @Override
@@ -199,7 +209,7 @@ public class Graphics2DRenderEngine implements IRenderEngine {
     }
 
     @Override
-    public Canvas getCanvas() {
-        return this.canvas;
+    public Image getRenderedImage() {
+        return this.buffers[this.bufferIndex];
     }
 }
