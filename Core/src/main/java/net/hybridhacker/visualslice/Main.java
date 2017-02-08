@@ -1,6 +1,5 @@
 package net.hybridhacker.visualslice;
 
-import java.net.URISyntaxException;
 import net.hybridhacker.visualslice.gui.Controller;
 import net.hybridhacker.visualslice.plugins.PluginManager;
 import net.hybridhacker.visualslice.plugins.loader.InternalPluginLoader;
@@ -9,6 +8,8 @@ import net.hybridhacker.visualslice.utils.CommandLineInterface;
 import org.apache.commons.cli.MissingArgumentException;
 import org.apache.commons.cli.MissingOptionException;
 import org.apache.commons.cli.ParseException;
+
+import java.net.URISyntaxException;
 
 /**
  * Application's main class
@@ -19,6 +20,8 @@ public final class Main {
      * The default folder to load plugins from
      */
     private static final String PLUGIN_FOLDER = "plugins/";
+    
+    public static final String VERSION = "0.1";
     
     /**
      * the command line interface
