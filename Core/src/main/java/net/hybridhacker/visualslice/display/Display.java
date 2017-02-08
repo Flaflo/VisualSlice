@@ -54,6 +54,7 @@ public final class Display extends Thread {
         this.height = height;
 
         this.window = new JFrame(title);
+        this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setSize(new Dimension(width, height));
         this.window.setLocationRelativeTo(null);
         this.window.setResizable(false);
@@ -77,6 +78,7 @@ public final class Display extends Thread {
         while (this.window.isShowing()) {
             long start = System.nanoTime() / 1_000_000;
             Controller.getInstance().getRenderEngine().initRenderPass();
+            Controller.getInstance().getRenderEngine().clear();
             Arrays.stream(this.renderers).forEach(Runnable::run);
             Controller.getInstance().getRenderEngine().endRenderPass();
 
