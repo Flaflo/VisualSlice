@@ -47,6 +47,12 @@ public class PluginAutoRegisterProcessor extends AbstractProcessor {
         for (final Element element : roundEnv.getElementsAnnotatedWith(AutoRegister.class)) {
             if (element instanceof TypeElement) {
                 final TypeElement typeElement = (TypeElement) element;
+    
+                if (!processingEnv.getTypeUtils().isAssignable(typeElement.asType(), processingEnv.getElementUtils().getTypeElement
+                        (SlicePlugin.class.getCanonicalName()).asType())) {
+                    throw new IllegalPluginDefinitionException(typeElement.asType().toString() + " does not implement " + SlicePlugin
+                            .class.getCanonicalName());
+                }
                 
                 try {
                     final String fileName = AutoRegister.PLUGIN_META_FILE;
