@@ -20,7 +20,7 @@ public class Graphics2DRenderEngine implements IRenderEngine {
      */
     private static final Color STANDARD_CLEAR_COLOR = Color.BLACK;
 
-    private Canvas canvas;
+    private Canvas canvas = new Canvas();
 
     private boolean antialiasing;
 
@@ -36,7 +36,6 @@ public class Graphics2DRenderEngine implements IRenderEngine {
 
     @Override
     public void init(int width, int height, int bufferCount) {
-        this.canvas = new Canvas();
         this.canvas.setPreferredSize(new Dimension(width, height));
 
         this.canvas.createBufferStrategy(bufferCount);
