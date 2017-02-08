@@ -10,7 +10,6 @@ import net.hybridhacker.visualslice.gui.items.DecoratorListCellRenderer;
 import net.hybridhacker.visualslice.gui.items.DecoratorListItem;
 import net.hybridhacker.visualslice.gui.screens.settings.DecoratorSettingsFrame;
 import net.hybridhacker.visualslice.renderer.VisualizerRenderer;
-import net.hybridhacker.visualslice.utils.G2D;
 import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.VisualizerRegistry;
 
@@ -64,7 +63,7 @@ public class VisualSliceGui extends javax.swing.JPanel {
                     }
 
                     if (Controller.getInstance().getBuilder().getDecoratorSettings(decorator).length > 0) {
-                        final DecoratorSettingsFrame settings = new DecoratorSettingsFrame(G2D.window(), decorator);
+                        final DecoratorSettingsFrame settings = new DecoratorSettingsFrame(Controller.getInstance().getDisplay().getWindow(), decorator);
                         settings.pack();
                         settings.setVisible(true);
                     }

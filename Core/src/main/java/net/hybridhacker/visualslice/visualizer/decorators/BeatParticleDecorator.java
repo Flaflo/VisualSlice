@@ -3,17 +3,16 @@ package net.hybridhacker.visualslice.visualizer.decorators;
 import ddf.minim.AudioBuffer;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
+import java.awt.*;
+import java.util.Random;
+import net.hybridhacker.visualslice.gui.Controller;
 import net.hybridhacker.visualslice.particlesystem.Particle;
 import net.hybridhacker.visualslice.particlesystem.ParticleSystem;
 import net.hybridhacker.visualslice.particlesystem.Vector2D;
 import net.hybridhacker.visualslice.particlesystem.particles.SimpleParticle;
-import net.hybridhacker.visualslice.utils.G2D;
 import net.hybridhacker.visualslice.visualizer.AbstractVisualizerDecorator;
 import net.hybridhacker.visualslice.visualizer.IVisualizer;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
-
-import java.awt.*;
-import java.util.Random;
 
 /**
  *
@@ -40,8 +39,8 @@ public class BeatParticleDecorator extends AbstractVisualizerDecorator {
     protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer,
                           final BeatDetect beatDetect, final FFT fft, final int trackLength, final int trackPosition) {
         if (!init) {
-            final int midX = G2D.canvas().getWidth() / 2;
-            final int midY = G2D.canvas().getHeight() / 2;
+            final int midX = Controller.getInstance().getDisplay().getWidth() / 2;
+            final int midY = Controller.getInstance().getDisplay().getHeight() / 2;
             
             system.addHandler((ps, tick) -> ps.getParticles().add(new SimpleParticle(new Vector2D(midX, midY),
                                                                                      new Vector2D(random.nextDouble() - 0.5D,

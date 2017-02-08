@@ -1,10 +1,9 @@
 package net.hybridhacker.visualslice.particlesystem.particles;
 
+import java.awt.*;
+import net.hybridhacker.visualslice.gui.Controller;
 import net.hybridhacker.visualslice.particlesystem.Particle;
 import net.hybridhacker.visualslice.particlesystem.Vector2D;
-import net.hybridhacker.visualslice.utils.G2D;
-
-import java.awt.*;
 
 /**
  * A simple circular particle that does not change its image
@@ -44,6 +43,7 @@ public class SimpleParticle extends Particle {
     @Override
     protected void onDraw() {
         this.getPosition().add(this.getVelocity());
-        G2D.oval((int) this.getX(), (int) this.getY(), this.size, this.size, this.color);
+        Controller.getInstance().getRenderEngine().setColor(this.color);
+        Controller.getInstance().getRenderEngine().fillOval((int) this.getX(), (int) this.getY(), this.size, this.size);
     }
 }

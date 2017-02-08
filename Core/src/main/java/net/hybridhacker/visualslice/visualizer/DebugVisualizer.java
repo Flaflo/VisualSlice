@@ -3,76 +3,78 @@ package net.hybridhacker.visualslice.visualizer;
 import ddf.minim.AudioBuffer;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;
+import java.awt.*;
 import lombok.Getter;
 import lombok.Setter;
-import net.hybridhacker.visualslice.utils.FXUtil;
-import net.hybridhacker.visualslice.utils.G2D;
+import net.hybridhacker.visualslice.gui.Controller;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
-
-import java.awt.*;
 
 /**
  * A visualizer for debugging purpose
  */
 public class DebugVisualizer implements IVisualizer {
-    
+
     @Setter
     @Getter
     private Color color;
-    
+
     public DebugVisualizer() {
         this.color = Color.BLACK;
     }
-    
+
     @Override
-    public void initialize() {}
-    
+    public void initialize() {
+    }
+
     @Override
     public void onDraw(final int playerLength, final int playerPosition, final AudioBuffer leftAudioBuffer,
-                       final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
-        
+            final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer, final BeatDetect beatDetect, final FFT fft) {
+
         final int bufferSize = mixAudioBuffer.size();
-    
+
         final Color color2 = this.getColor().brighter();
-    
+
         { //Volume
             for (int i = 0; i < bufferSize - 1; i++) {
-                G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 20), i, (int) (50 - leftAudioBuffer.get(i + 1) * 20), color2);
-                G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 - rightAudioBuffer.get(i + 1) * 20), color2);
-    
-                G2D.line(i, (int) (50 + leftAudioBuffer.get(i) * 5), i, (int) (50 - leftAudioBuffer.get(i + 1) * 5), this.getColor());
-                G2D.line(i, (int) (50 + rightAudioBuffer.get(i) * 5), i, (int) (50 - rightAudioBuffer.get(i + 1) * 5), this.getColor());
+                Controller.getInstance().getRenderEngine().setColor(color2);
+                Controller.getInstance().getRenderEngine().drawLine(i, (int) (50 + leftAudioBuffer.get(i) * 20), i, (int) (50 - leftAudioBuffer.get(i + 1) * 20));
+                Controller.getInstance().getRenderEngine().drawLine(i, (int) (50 + rightAudioBuffer.get(i) * 20), i, (int) (50 - rightAudioBuffer.get(i + 1) * 20));
+
+                Controller.getInstance().getRenderEngine().setColor(this.getColor());
+                Controller.getInstance().getRenderEngine().drawLine(i, (int) (50 + leftAudioBuffer.get(i) * 5), i, (int) (50 - leftAudioBuffer.get(i + 1) * 5));
+                Controller.getInstance().getRenderEngine().drawLine(i, (int) (50 + rightAudioBuffer.get(i) * 5), i, (int) (50 - rightAudioBuffer.get(i + 1) * 5));
             }
         }
-    
+
         { //FFT Bands
             final double scale = 0.8;
             final int min = 2;
             final int width = 20;
             final int gap = 2;
-        
-            for (int i = 0; i < G2D.canvas().getWidth() / (width + gap); i++) {
+
+            Controller.getInstance().getRenderEngine().setColor(color2);
+            for (int i = 0; i < Controller.getInstance().getDisplay().getWidth() / (width + gap); i++) {
                 final int height = (int) Math.max(fft.getBand(i * width) * scale, min);
-                G2D.texture(i * (width + gap) - 10, G2D.canvas().getHeight() - height - 15,
-                            FXUtil.generateGlow(width, height, 10, Color.CYAN, 0.8F));
-                //                G2D.rect(i * (width + gap), G2D.canvas().getHeight() - height, width, height, color2);
+                Controller.getInstance().getRenderEngine().fillRect(i * (width + gap), Controller.getInstance().getDisplay().getHeight() - height, width, height);
             }
         }
-    
+
         { //Player progress 
-            final int width = (int) Math.round(((double) playerPosition / (double) playerLength) * G2D.canvas().getWidth());
+            final int width = (int) Math.round(((double) playerPosition / (double) playerLength) * Controller.getInstance().getDisplay().getWidth());
             final int height = 4;
-        
-            G2D.rect(0, 0, G2D.canvas().getWidth(), height, color);
-            G2D.rect(0, 0, width, height, color2);
+
+            Controller.getInstance().getRenderEngine().setColor(color);
+            Controller.getInstance().getRenderEngine().fillRect(0, 0, Controller.getInstance().getDisplay().getWidth(), height);
+            Controller.getInstance().getRenderEngine().setColor(color2);
+            Controller.getInstance().getRenderEngine().fillRect(0, 0, width, height);
         }
     }
-    
+
     @Override
     public String getName() {
         return "Debug Visualizer";
     }
-    
+
     @Override
     public Setting<?>[] getSettings() {
         return new Setting<?>[0];
