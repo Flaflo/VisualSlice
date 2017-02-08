@@ -250,6 +250,11 @@ public interface IRenderEngine {
     public void setAntialiasing(final boolean antialiasing);
 
     /**
+     * @return true if antialiasing is enabled
+     */
+    public boolean isAntialiasing();
+
+    /**
      * @return the canvas this engine is drawing onto
      */
     public Canvas getCanvas();

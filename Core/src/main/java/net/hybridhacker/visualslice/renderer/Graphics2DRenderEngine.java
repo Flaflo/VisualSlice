@@ -193,6 +193,11 @@ public class Graphics2DRenderEngine implements IRenderEngine {
     }
 
     @Override
+    public boolean isAntialiasing() {
+        return this.antialiasing;
+    }
+    
+    @Override
     public Canvas getCanvas() {
         return this.canvas;
     }
