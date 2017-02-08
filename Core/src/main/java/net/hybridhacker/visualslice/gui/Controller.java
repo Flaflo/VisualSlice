@@ -37,7 +37,7 @@ public final class Controller {
      * This class is a singleton and thus handles its creation on its own
      */
     private Controller() {
-        Controller.getInstance().getRenderEngine().setAntialiasing(true);
+        this.renderEngine.setAntialiasing(true);
     }
 
     /**
