@@ -8,20 +8,20 @@ public interface SlicePlugin {
     /**
      * Called upon plugin enabling. Should register all plugin contents
      */
-    void onEnable();
+    public void onEnable();
     
     /**
      * @return the plugin's name
      */
-    String getName();
+    public String getName();
     
     /**
      * @return the plugin's author (nick-) name
      */
-    String getAuthor();
+    public String getAuthor();
     
     /**
      * @return the plugin's version
      */
-    String getVersion();
+    public String getVersion();
 }
