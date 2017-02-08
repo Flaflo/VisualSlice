@@ -50,32 +50,26 @@ public class VisualSliceGui extends javax.swing.JPanel {
 
         this.decoratorList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent event) {
-                final JList<DecoratorListItem> list = (JList<DecoratorListItem>) event.getSource();
-                final int index = list.locationToIndex(event.getPoint());
+                if (event.getButton() == MouseEvent.BUTTON1) {
+                    final JList<DecoratorListItem> list = (JList<DecoratorListItem>) event.getSource();
+                    final int index = list.locationToIndex(event.getPoint());
 
-                final DecoratorListItem item = (DecoratorListItem) list.getModel().getElementAt(index);
-                final String decorator = DecoratorRegistry.getInstance().getRegisteredDecorators()[index];
+                    final DecoratorListItem item = (DecoratorListItem) list.getModel().getElementAt(index);
+                    final String decorator = DecoratorRegistry.getInstance().getRegisteredDecorators()[index];
 
-                if (event.getButton() == MouseEvent.BUTTON3) {
-                    if (!item.isSelected()) {
-                        item.setSelected(true);
-                        Controller.getInstance().getBuilder().addDecorator(decorator);
-                    }
-
-                    if (Controller.getInstance().getBuilder().getDecoratorSettings(decorator).length > 0) {
+                    if (DecoratorRegistry.getInstance().getSettingsOfDecorator(decorator).length > 0) {
                         final DecoratorSettingsFrame settings = new DecoratorSettingsFrame(Controller.getInstance().getDisplay().getWindow(), decorator);
                         settings.pack();
                         settings.setVisible(true);
                     }
-                } else {
                     item.setSelected(!item.isSelected());
                     if (item.isSelected()) {
                         Controller.getInstance().getBuilder().addDecorator(decorator);
                     } else {
                         Controller.getInstance().getBuilder().removeDecorator(decorator);
                     }
+                    list.repaint(list.getCellBounds(index, index));
                 }
-                list.repaint(list.getCellBounds(index, index));
             }
         });
 

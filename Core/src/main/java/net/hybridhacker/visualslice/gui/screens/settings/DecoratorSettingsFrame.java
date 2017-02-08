@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import net.hybridhacker.visualslice.gui.Controller;
+import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
 
 /**
@@ -22,7 +22,7 @@ public class DecoratorSettingsFrame extends JFrame {
         
         initComponents();
         
-        final Setting<?>[] settings = Controller.getInstance().getBuilder().getDecoratorSettings(decorator);
+        final Setting<?>[] settings = DecoratorRegistry.getInstance().getSettingsOfDecorator(decorator);
         
         for (final Setting<?> setting : settings) {
             this.add(new JLabel(setting.getName()));
