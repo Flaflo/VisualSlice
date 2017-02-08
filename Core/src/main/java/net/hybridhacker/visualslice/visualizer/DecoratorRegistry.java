@@ -1,5 +1,7 @@
 package net.hybridhacker.visualslice.visualizer;
 
+import net.hybridhacker.visualslice.visualizer.settings.Setting;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -11,6 +13,7 @@ public class DecoratorRegistry {
     private final static DecoratorRegistry instance;
     
     private final Map<String, Function<IVisualizer, ? extends AbstractVisualizerDecorator>> registeredDecorators = new HashMap<>();
+    private final Map<String, Setting<?>[]> decoratorPrototypeSettings = new HashMap<>();
     
     static {
         instance = new DecoratorRegistry();
@@ -38,6 +41,7 @@ public class DecoratorRegistry {
      */
     public void registerDecorator(final AbstractVisualizerDecorator prototype) {
         this.registeredDecorators.put(prototype.getName(), prototype::create);
+        this.decoratorPrototypeSettings.put(prototype.getName(), prototype.getSettings());
     }
     
     /**
@@ -45,6 +49,17 @@ public class DecoratorRegistry {
      */
     public String[] getRegisteredDecorators() {
         return this.registeredDecorators.keySet().toArray(new String[this.registeredDecorators.size()]);
+    }
+    
+    /**
+     * Get the settings of a decorator to change them
+     *
+     * @param decorator the name of the desired decorator
+     *
+     * @return an array of settings.
+     */
+    public Setting<?>[] getSettingsOfDecorator(final String decorator) {
+        return this.decoratorPrototypeSettings.get(decorator);
     }
     
     /**
@@ -56,6 +71,14 @@ public class DecoratorRegistry {
      * @return a new instance of any subclass of {@link AbstractVisualizerDecorator}
      */
     public AbstractVisualizerDecorator createNewDecorator(final String decorator, final IVisualizer embeddedVisualizer) {
-        return this.registeredDecorators.get(decorator).apply(embeddedVisualizer);
+        final AbstractVisualizerDecorator decoratorInst = this.registeredDecorators.get(decorator).apply(embeddedVisualizer);
+        final Setting<?>[] settings = decoratorInst.getSettings();
+        final Setting<?>[] prototypeSettings = decoratorPrototypeSettings.get(decorator);
+    
+        for (int i = 0; i < settings.length; i++) {
+            settings[i].setValue(prototypeSettings[i]);
+        }
+    
+        return decoratorInst;
     }
 }

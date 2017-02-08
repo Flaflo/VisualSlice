@@ -11,6 +11,11 @@ public interface SlicePlugin {
     void onEnable();
     
     /**
+     * @return the plugin's name
+     */
+    String getName();
+    
+    /**
      * @return the plugin's author (nick-) name
      */
     String getAuthor();

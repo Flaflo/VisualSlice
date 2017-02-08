@@ -24,6 +24,8 @@ public class GenericBuilder implements VisualizerBuilder {
     private IVisualizer visualizer = null;
     
     private final List<String> decorators = new ArrayList<>();
+    
+    @Deprecated
     private final Map<String, AbstractVisualizerDecorator> decoratorPrototypes = new HashMap<>();
     
     public GenericBuilder() {
@@ -38,15 +40,7 @@ public class GenericBuilder implements VisualizerBuilder {
         IVisualizer hithertoVisualizer = this.visualizer;
         
         for (String decoratorName : decorators) {
-            final AbstractVisualizerDecorator decorator =
-                    DecoratorRegistry.getInstance().createNewDecorator(decoratorName, hithertoVisualizer);
-    
-            final Setting[] prototypeSettings = this.getDecoratorSettings(decoratorName);
-            for (int i = 0; i < prototypeSettings.length; i++) {
-                decorator.getSettings()[i].setValue(prototypeSettings[i].getValue());
-            }
-            
-            hithertoVisualizer = decorator;
+            hithertoVisualizer = DecoratorRegistry.getInstance().createNewDecorator(decoratorName, hithertoVisualizer);
         }
     
         hithertoVisualizer.initialize();
@@ -77,6 +71,7 @@ public class GenericBuilder implements VisualizerBuilder {
      *
      * @return an array of settings assigned to the decorator with given name
      */
+    @Deprecated
     public Setting<?>[] getDecoratorSettings(final String name) {
         return this.decoratorPrototypes.get(name).getSettings();
     }

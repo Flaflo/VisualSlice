@@ -1,5 +1,7 @@
 package net.hybridhacker.visualslice.plugins.loader;
 
+import net.hybridhacker.visualslice.plugins.SlicePlugin;
+
 import java.util.List;
 
 /**
@@ -12,5 +14,5 @@ public interface PluginLoader {
      *
      * @return a (potentially empty) list of loaded plugin instances
      */
-    public List<Object> loadPlugins();
+    public List<SlicePlugin> loadPlugins();
 }
