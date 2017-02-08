@@ -1,10 +1,15 @@
 package net.hybridhacker.visualslice.gui.screens.settings;
 
 import java.awt.Color;
+import java.io.File;
+import java.net.URI;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import net.hybridhacker.visualslice.visualizer.DecoratorRegistry;
 import net.hybridhacker.visualslice.visualizer.settings.Setting;
 
@@ -19,25 +24,37 @@ public class DecoratorSettingsFrame extends JFrame {
      */
     public DecoratorSettingsFrame(final JFrame parent, final String decorator) {
         super(decorator);
-        
+
         initComponents();
-        
+
         final Setting<?>[] settings = DecoratorRegistry.getInstance().getSettingsOfDecorator(decorator);
-        
+
         for (final Setting<?> setting : settings) {
             this.add(new JLabel(setting.getName()));
-            
+
             final JButton button = new JButton("Config");
-            
+
             if (setting.getValue() instanceof Color) {
-                button.addActionListener((e) ->
-                    setting.setValue(JColorChooser.showDialog(this, "Choose a Color", (Color) setting.getValue()))
+                button.addActionListener((e)
+                        -> setting.setValue(JColorChooser.showDialog(this, "Choose a Color", (Color) setting.getValue()))
                 );
-                
+
+                this.add(button);
+            } else if (setting.getValue() instanceof URI) {
+                button.addActionListener((e) -> {
+                    final JFileChooser chooser = new JFileChooser();
+                    chooser.setFileFilter(new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes()));
+
+                    if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                        final String destination = chooser.getSelectedFile().getAbsolutePath();
+
+                        setting.setValue(new File(destination).toURI());
+                    }
+                });
                 this.add(button);
             }
         }
-        
+
         this.setLocationRelativeTo(parent);
     }
 

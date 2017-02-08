@@ -148,7 +148,9 @@ public class Graphics2DRenderEngine implements IRenderEngine {
 
     @Override
     public void clearRect(int x, int y, int width, int height) {
+        this.graphics.setColor(this.clearColor);
         this.graphics.clearRect(x, y, width, height);
+        this.graphics.setColor(this.color);
     }
 
     @Override
@@ -195,7 +197,7 @@ public class Graphics2DRenderEngine implements IRenderEngine {
     public boolean isAntialiasing() {
         return this.antialiasing;
     }
-    
+
     @Override
     public Canvas getCanvas() {
         return this.canvas;

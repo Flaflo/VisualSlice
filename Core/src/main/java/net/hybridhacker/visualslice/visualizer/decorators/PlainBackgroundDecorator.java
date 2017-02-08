@@ -30,7 +30,7 @@ public class PlainBackgroundDecorator extends AbstractVisualizerDecorator {
     protected void doDraw(final AudioBuffer leftAudioBuffer, final AudioBuffer rightAudioBuffer, final AudioBuffer mixAudioBuffer,
                           final BeatDetect beatDetect, final FFT fft, final int trackLength, final int trackPosition) {
         Controller.getInstance().getRenderEngine().setColor(color);
-        Controller.getInstance().getRenderEngine().clear();
+        Controller.getInstance().getRenderEngine().fillRect(0, 0, Controller.getInstance().getDisplay().getWidth(), Controller.getInstance().getDisplay().getHeight());
     }
     
     @Override
