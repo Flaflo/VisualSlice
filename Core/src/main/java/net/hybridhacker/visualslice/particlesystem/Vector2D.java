@@ -20,8 +20,37 @@ public class Vector2D {
      * @param vector a {@link Vector2D} instance
      */
     public void add(final Vector2D vector) {
-        this.x += vector.getX();
-        this.y += vector.getY();
+        this.add(vector.getX(), vector.getY());
+    }
+    
+    /**
+     * Add an implicit vector to this vector
+     *
+     * @param x the x component to add
+     * @param y the y component to add
+     */
+    public void add(final double x, final double y) {
+        this.x += x;
+        this.y += y;
+    }
+    
+    /**
+     * subtract another vector to this vector
+     *
+     * @param vector a {@link Vector2D} instance
+     */
+    public void subtract(final Vector2D vector) {
+        this.add(-vector.getX(), -vector.getY());
+    }
+    
+    /**
+     * Subtract an implicit vector to this vector
+     *
+     * @param x the x component to subtract
+     * @param y the y component to subtract
+     */
+    public void subtract(final double x, final double y) {
+        this.add(-x, -y);
     }
     
     /**
@@ -58,5 +87,12 @@ public class Vector2D {
     public void multiply(final double factor) {
         this.x *= factor;
         this.y *= factor;
+    }
+    
+    /**
+     * @return the dot-product (scalar product) of this vector with another vector
+     */
+    public double dot(final Vector2D vector) {
+        return this.x * vector.getX() + this.y * vector.getY();
     }
 }
